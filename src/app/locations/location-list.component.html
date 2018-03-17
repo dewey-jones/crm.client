@@ -1,0 +1,25 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{ pageTitle }}
+    </div>
+</div>
+<div class='panel-body'>
+    <div class='table-responsive'>
+        <table class='table' 
+                *ngIf='locations && locations.length'>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>Short Name</th>
+                    <th>Portal Id</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr  *ngFor='let location of locations'>
+                    <td>{{ location.locationNm }}</td>
+                    <td>{{ location.locationNmShort }}</td>
+                    <td>{{ location.portalId }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>

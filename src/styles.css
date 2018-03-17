@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+li {
+    font-size: large;
+}
+
+div.panel-heading {
+   font-size: x-large;
+}
+
+.fieldInvalid {
+    color: red;
+    padding: 0 15px;
+    margin-top: 5px;
+}

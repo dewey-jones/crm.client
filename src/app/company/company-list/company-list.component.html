@@ -1,0 +1,41 @@
+<div class='panel panel-primary'>
+  <div class='panel-heading'>
+      {{ pageTitle }}
+  </div>
+</div>
+<div class='panel-body'>
+  <div class='table-responsive'>
+      <table class='table' 
+              *ngIf='companies && companies.length'>
+          <thead>
+              <tr>
+                  <th>Company Name</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor='let company of companies'>
+                  <td><a [routerLink]="['/company', company.id]">{{ company.companyName }}</a></td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</div>
+  <!-- id: number;
+  companyName: string;
+  sales: number;
+  employees: number;
+  addr1: string;
+  addr2: string;
+  city: string;
+  state: string;
+  zip: string;
+  phone: string;
+  contact: boolean;
+  mail: boolean;
+  mailDate: Date;
+  callOn: Date;
+  companyNotes: Date;
+  rating: number;
+  nearby: boolean;
+  appropriate: number;
+  consultants: boolean; -->
