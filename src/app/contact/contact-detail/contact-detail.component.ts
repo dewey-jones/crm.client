@@ -74,6 +74,10 @@ export class ContactDetailComponent implements OnInit {
       error => this.errorMessage = <any>error);
   }
 
+  onShouldContactChange(value): void {
+    this.contact.shouldContact = value;
+  }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
