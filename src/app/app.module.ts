@@ -11,11 +11,15 @@ import { StarComponent } from './shared/star.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
-import { ContactListComponent } from './contact/contact-list/contact-list.component';
-import { ContactDetailComponent } from './contact/contact-detail/contact-detail.component';
 import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
 import { CompanyEditComponent } from './company/company-edit/company-edit.component';
+import { CompanyService } from './company/company.service';
+import { ContactListComponent } from './contact/contact-list/contact-list.component';
+import { ContactDetailComponent } from './contact/contact-detail/contact-detail.component';
 import { ContactService } from './contact/contact.service';
+import { NoteDetailComponent } from './note/note-detail/note-detail.component';
+import { NoteListComponent } from './note/note-list/note-list.component';
+import { NoteService } from './note/note.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,9 @@ import { ContactService } from './contact/contact.service';
     ContactListComponent,
     ContactDetailComponent,
     CompanyDetailComponent,
-    CompanyEditComponent
+    CompanyEditComponent,
+    NoteDetailComponent,
+    NoteListComponent
   ],
   imports: [
     BrowserModule,
@@ -43,11 +49,13 @@ import { ContactService } from './contact/contact.service';
       { path: 'company/:id', component: CompanyDetailComponent },
       { path: 'contact', component: ContactListComponent },
       { path: 'contact/:id', component: ContactDetailComponent },
+      { path: 'note', component: NoteListComponent },
+      { path: 'note/:id', component: NoteDetailComponent },
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
   ],
-  providers: [ ContactService ],
+  providers: [ ContactService, CompanyService, NoteService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

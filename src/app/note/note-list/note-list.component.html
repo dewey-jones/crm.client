@@ -1,0 +1,15 @@
+<div>
+  <table class="table table-striped table-hover table-responsive" *ngIf='notes && notes.length'>
+      <thead>
+          <th style="padding: 0 1em; width: 30%">Date</th>
+          <th style="padding: 0 1em; width: 70%">Note</th>
+      </thead>
+      <tr *ngFor='let note of notes'>
+        <td><a [routerLink]="['/note', note.id]">{{note.contactDate | date:'shortDate'}}</a></td>
+        <td style="position: relative"><div style="position: absolute; max-width: 90%; white-space: wrap; overflow: hidden; text-overflow: ellipsis">{{note.noteText}}</div></td>
+      </tr>
+  </table>
+  <div class="col-xs-12" style="margin: 4px">
+    <button type="button" class="btn btn-default" id="btnAddNote" (click)="addNote()">Add</button>
+  </div>
+</div>
