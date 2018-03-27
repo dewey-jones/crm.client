@@ -6,7 +6,7 @@ import { INote, Note } from '../note';
 
 
 @Component({
-  selector: 'pm-note',
+  selector: 'crm-note',
   templateUrl: './note-detail.component.html',
   styleUrls: ['./note-detail.component.css']
 })
