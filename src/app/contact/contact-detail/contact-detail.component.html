@@ -61,8 +61,8 @@
         <button type="submit" class="btn btn-primary pull-left" id="btnSave" [disabled]="contactForm.invalid" (click)="save()">Save</button>
       </div>
     </div>
-  </form>
-  <div style="padding: 1em" id="note-list">
+    <div id="note-list">
       <crm-note-list [contactId]='contact.id'></crm-note-list>
-  </div>
+    </div>
+  </form>
 </div>
