@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
@@ -20,6 +21,38 @@ import { ContactService } from './contact/contact.service';
 import { NoteDetailComponent } from './note/note-detail/note-detail.component';
 import { NoteListComponent } from './note/note-list/note-list.component';
 import { NoteService } from './note/note.service';
+// import {
+//   MatFormFieldModule, 
+//   MatInputModule,
+//   MatButtonModule,
+//   MatRippleModule,
+//   MatDialog,
+//   MatDialogRef
+// } from '@angular/material';
+
+import { AppMaterialModule } from './app-material/app-material.module';
+
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
+
+// @NgModule({
+//   exports: [
+//     MatButtonModule,
+//     MatFormFieldModule,
+//     MatInputModule,
+//     MatRippleModule,
+//     MatDialog,
+//     MatDialogRef
+//   ],
+//   imports: [
+//     MatButtonModule,
+//     MatFormFieldModule,
+//     MatInputModule,
+//     MatRippleModule,
+//     MatDialog,
+//     MatDialogRef
+//   ],
+// })
+// export class MaterialModule {};
 
 @NgModule({
   declarations: [
@@ -35,12 +68,15 @@ import { NoteService } from './note/note.service';
     CompanyDetailComponent,
     CompanyEditComponent,
     NoteDetailComponent,
-    NoteListComponent
+    NoteListComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AppMaterialModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
       { path: 'products', component: ProductListComponent },
       { path: 'products/:id', component: ProductDetailComponent },
@@ -54,8 +90,19 @@ import { NoteService } from './note/note.service';
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
+    // MatButtonModule,
+    // MatFormFieldModule,
+    // MatInputModule,
+    // MatRippleModule,
+    // MatDialog,
+    // MatDialogRef
   ],
+  // exports: [
+  //   MatDialog,
+  //   MatDialogRef
+  // ],
   providers: [ ContactService, CompanyService, NoteService ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ConfirmationDialogComponent]
 })
 export class AppModule { }

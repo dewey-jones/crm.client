@@ -1,8 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material';
+// import { 
+//   MatButtonModule,
+//   MatFormFieldModule,
+//   MatInputModule,
+//   MatRippleModule,
+//   MatDialog,
+//   MatDialogRef
+// } from './../../app-material/app-material.module';
 
 import { ICompany } from '../company';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   templateUrl: './company-detail.component.html',
@@ -13,10 +23,12 @@ export class CompanyDetailComponent implements OnInit {
   errorMessage: string;
 
   company: ICompany;
+  dialogRef: M2<ConfirmationDialogComponent>;
   
   constructor(private _companyService: CompanyService, 
     private _route: ActivatedRoute, 
-    private _router: Router) {
+    private _router: Router,
+    public dialog: M1) {
    }
   
   ngOnInit(): void {
@@ -45,5 +57,17 @@ export class CompanyDetailComponent implements OnInit {
       },
       error => this.errorMessage = <any>error);
   }
+  openConfirmationDialog() {
+    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete?"
 
+    this.dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.delete();
+      }
+      this.dialogRef = null;
+    });
+  }
 }

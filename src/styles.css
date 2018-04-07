@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
 li {
     font-size: large;
 }
@@ -11,4 +13,8 @@ div.panel-heading {
     color: red;
     padding: 0 15px;
     margin-top: 5px;
+}
+.formContainer {
+    display: flex;
+    flex-direction: column;
 }
