@@ -1,15 +1,16 @@
 <div>
-    <nav class='navbar navbar-default'>
-      <div class='container-fluid'>
-        <a class='navbar-brand'>{{pageTitle}}</a>
-        <ul class='nav navbar-nav'>
-          <li><a [routerLink]="['/welcome']">Home</a></li>
-          <li><a [routerLink]="['/products']">Product List</a></li>
-          <li><a [routerLink]="['/company']">Companies</a></li>
-          </ul>
-      </div>
-    </nav>
-    <div class='container'>
-      <router-outlet></router-outlet>
-    </div>
+  <a [routerLink]="['/company']">Companies</a>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <span>Home</span>
+      <a [routerLink]="['/welcome']">Home</a>
+    </button>
+    <button mat-menu-item>
+      <span>Companies</span>
+      <a [routerLink]="['/company']">Companies</a>
+    </button>
+  </mat-menu>
+  <div class='container'>
+    <router-outlet></router-outlet>
   </div>
+</div>

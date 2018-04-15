@@ -20,8 +20,8 @@
         <input matInput placeholder="State" name="state" [(ngModel)]="company.state">
       </mat-form-field>
       <div style="display: flex; flex-direction: row; justify-content: space-around">
-        <button mat-button id="btnDelete" (click)="openConfirmationDialog()">Delete</button>
-        <button mat-button type="submit" id="btnSave" (click)="save()">Save</button>
+          <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
+          <button mat-raised-button color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
       </div>
     </div>
   </form>

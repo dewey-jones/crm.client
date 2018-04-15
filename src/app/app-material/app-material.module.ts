@@ -7,7 +7,8 @@ import {
   MatInputModule,
   MatButtonModule,
   MatRippleModule,
-  MatDialogModule
+  MatDialogModule,
+  MatMenuModule
 } from '@angular/material';
 
 @NgModule({
@@ -17,14 +18,16 @@ import {
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   exports: [
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
     MatRippleModule,
-    MatDialogModule
+    MatDialogModule,
+    MatMenuModule
   ],
   declarations: []
 })
