@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ICompany } from '../company';
 import { CompanyService } from '../company.service';
 
@@ -10,10 +11,11 @@ import { CompanyService } from '../company.service';
 export class CompanyListComponent implements OnInit {
   pageTitle: string = 'Company List';
   errorMessage: string;
-  
+  displayedColumns = ['companyName'];
   companies: ICompany[] = [];
   
-  constructor(private _companyService: CompanyService) { }
+  constructor(private _companyService: CompanyService,
+    private _router: Router) { }
 
   ngOnInit(): void {
     this._companyService.getCompanies()
@@ -22,6 +24,10 @@ export class CompanyListComponent implements OnInit {
         },
         error => this.errorMessage = <any>error);
     
+  }
+
+  addCompany(): void {
+    this._router.navigate(['/company', 0])
   }
 
 }

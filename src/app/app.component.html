@@ -1,16 +1,15 @@
 <div>
-  <a [routerLink]="['/company']">Companies</a>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item>
-      <span>Home</span>
-      <a [routerLink]="['/welcome']">Home</a>
-    </button>
-    <button mat-menu-item>
-      <span>Companies</span>
-      <a [routerLink]="['/company']">Companies</a>
-    </button>
-  </mat-menu>
-  <div class='container'>
+  <div style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 12px">
+    <mat-button-toggle-group #group="matButtonToggleGroup" [value]="selectedVal" (change)="onValChange(group.value)">
+      <mat-button-toggle value="/">
+        Home
+      </mat-button-toggle>
+      <mat-button-toggle value="/company">
+        Companies
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <div>
     <router-outlet></router-outlet>
   </div>
 </div>

@@ -1,24 +1,16 @@
-<div class='panel panel-primary'>
-  <div class='panel-heading'>
-      {{ pageTitle }}
-  </div>
+<div class='mat-title flexRowCenter'>
+    {{ pageTitle }}
 </div>
-<div class='panel-body'>
-  <div class='table-responsive'>
-      <table class='table' 
-              *ngIf='companies && companies.length'>
-          <thead>
-              <tr>
-                  <th>Company Name</th>
-              </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor='let company of companies'>
-                  <td><a [routerLink]="['/company', company.id]">{{ company.companyName }}</a></td>
-              </tr>
-          </tbody>
-      </table>
-  </div>
+<div style="display: flex; flex-direction: column;" class="mat-elevation-z8">
+	<mat-table #table [dataSource]="companies">
+		<ng-container matColumnDef="companyName">
+			<mat-header-cell *matHeaderCellDef> Company </mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<a [routerLink]="['/company', element.id]">{{ element.companyName }}</a>
+			</mat-cell>
+		</ng-container>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+	</mat-table>
 </div>
   <!-- id: number;
   companyName: string;
