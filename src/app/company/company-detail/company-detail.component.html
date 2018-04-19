@@ -1,8 +1,6 @@
 <div class='panel panel-primary' *ngIf='company'>
-  <div class='panel-heading'>
-    {{pageTitle}}
-  </div>
-  <form>
+  <div class="mat-headline flexRowCenter">{{pageTitle}}</div>
+  <form #companyForm="ngForm" style="padding: 1em">
     <div class="formContainer">
       <mat-form-field>
         <input matInput placeholder="Company" name="companyName" [(ngModel)]="company.companyName">
@@ -26,12 +24,12 @@
         </div>
       </div>
       <div style="display: flex; flex-direction: row; justify-content: space-around">
-          <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
-          <button mat-raised-button color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
+        <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
+        <button mat-raised-button color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
       </div>
     </div>
   </form>
   <div style="padding: 1em" id="contact-list">
-      <crm-contact-list [companyId]='company.id'></crm-contact-list>
+    <crm-contact-list [companyId]='company.id'></crm-contact-list>
   </div>
 </div>

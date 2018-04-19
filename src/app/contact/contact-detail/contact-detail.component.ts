@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { IContact, Contact } from '../contact';
 
 @Component({

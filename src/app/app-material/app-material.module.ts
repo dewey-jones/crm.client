@@ -3,38 +3,44 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
-  MatFormFieldModule, 
-  MatInputModule,
   MatButtonModule,
-  MatRippleModule,
+  MatButtonToggleModule,
+  MatCheckboxModule,
   MatDialogModule,
+  MatFormFieldModule, 
+  MatIconModule,
+  MatInputModule,
   MatMenuModule,
-  MatTableModule,
-  MatButtonToggleModule
+  MatRippleModule,
+  MatTableModule
 } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
     MatDialogModule,
+    MatFormFieldModule, 
+    MatIconModule,
+    MatInputModule,
     MatMenuModule,
-    MatTableModule,
-    MatButtonToggleModule
-  ],
+    MatRippleModule,
+    MatTableModule
+    ],
   exports: [
     MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRippleModule,
+    MatButtonToggleModule,
+    MatCheckboxModule,
     MatDialogModule,
+    MatFormFieldModule, 
+    MatIconModule,
+    MatInputModule,
     MatMenuModule,
-    MatTableModule,
-    MatButtonToggleModule
-  ],
+    MatRippleModule,
+    MatTableModule
+    ],
   declarations: []
 })
 export class AppMaterialModule { }

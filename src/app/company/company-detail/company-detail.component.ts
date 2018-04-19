@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material';
-// import { 
-//   MatButtonModule,
-//   MatFormFieldModule,
-//   MatInputModule,
-//   MatRippleModule,
-//   MatDialog,
-//   MatDialogRef
-// } from './../../app-material/app-material.module';
-
 import { ICompany } from '../company';
+import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
+  selector: 'crm-company-detail',
   templateUrl: './company-detail.component.html',
   styleUrls: ['./company-detail.component.css']
 })

@@ -23,8 +23,16 @@ div.panel-heading {
   flex-direction: row;
   justify-content: space-between;
 }
+.flexRowAround {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 .flexRowCenter {
   display: flex;
   flex-direction: row;
   justify-content: center;
+}
+.mat-button-toggle {
+  margin: 0 2px;
 }

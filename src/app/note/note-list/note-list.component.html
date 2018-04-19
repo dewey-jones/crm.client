@@ -9,7 +9,9 @@
         <td><span style="max-width: 50px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{note.noteText}}</span></td>
       </tr>
   </table>
-  <div style="margin: 4px">
-    <button type="button" class="btn btn-default" id="btnAddNote" (click)="addNote()">Add</button>
+  <div style="margin: 10px 0" class="flexRowCenter">
+      <button type="button" mat-fab id="btnAddContact" (click)="addContact()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
   </div>
-</div>

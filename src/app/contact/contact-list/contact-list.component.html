@@ -1,7 +1,7 @@
 <div style="display: flex; flex-direction: column;" class="mat-elevation-z1">
   <mat-table #table [dataSource]="contacts">
       <ng-container matColumnDef="fName">
-          <mat-header-cell *matHeaderCellDef>First</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
           <mat-cell *matCellDef="let element">
               <a [routerLink]="['/contact', element.id]">{{element.fName + ' ' + element.lName}}</a>
           </mat-cell>
@@ -15,7 +15,9 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <div style="margin: 4px">
-    <button type="button" class="btn btn-default" id="btnAddContact" (click)="addContact()">Add</button>
+  <div style="margin: 10px 0" class="flexRowCenter">
+    <button type="button" mat-fab id="btnAddContact" (click)="addContact()">
+      <mat-icon>add</mat-icon>
+    </button>
   </div>
 </div>
