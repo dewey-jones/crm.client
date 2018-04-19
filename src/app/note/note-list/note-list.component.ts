@@ -9,10 +9,9 @@ import { DatePipe } from '@angular/common';
   templateUrl: './note-list.component.html',
   styleUrls: ['./note-list.component.css']
 })
-export class NoteListComponent implements OnInit {
-
+export class NoteListComponent implements OnInit, OnChanges {
   @Input() contactId: number;
-
+  displayedColumns = ['contactDate', 'noteText'];
   notes: INote[] = [];
   summarizedNotes: INote[] = [];
   errorMessage: string;
