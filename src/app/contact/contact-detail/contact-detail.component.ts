@@ -36,7 +36,9 @@ export class ContactDetailComponent implements OnInit {
       this._contactService.getContact(id)
       .subscribe(contact => {
           this.contact = contact;
-      },
+          this.companyId = contact.companyId;
+          console.log("companyId is", this.companyId);
+        },
       error => this.errorMessage = <any>error);
     } else {
       this.contact = new Contact();

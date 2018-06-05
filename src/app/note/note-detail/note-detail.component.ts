@@ -27,7 +27,7 @@ export class NoteDetailComponent implements OnInit {
       .subscribe(params => {
         // Defaults contactId to 0 if no query param provided (new contact).
         this.contactId = +params['contactId'] || 0;
-        console.log("this.contactId", this.contactId);
+        console.log("this.contactId is", this.contactId);
       });
 
     console.log(this._route.snapshot.paramMap.get('id'));
