@@ -22,7 +22,7 @@ export class ContactService {
 
     getContact(id: number): Observable<IContact> {
         return this._http.get<IContact>(this._contactUrl + "/" + id)
-            .do(data => console.log('Contact: ' + JSON.stringify(data)))
+            // .do(data => console.log('Contact: ' + JSON.stringify(data)))
             .catch(this.handleError);
     }
 

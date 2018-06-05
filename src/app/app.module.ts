@@ -21,38 +21,10 @@ import { ContactService } from './contact/contact.service';
 import { NoteDetailComponent } from './note/note-detail/note-detail.component';
 import { NoteListComponent } from './note/note-list/note-list.component';
 import { NoteService } from './note/note.service';
-// import {
-//   MatFormFieldModule, 
-//   MatInputModule,
-//   MatButtonModule,
-//   MatRippleModule,
-//   MatDialog,
-//   MatDialogRef
-// } from '@angular/material';
 
 import { AppMaterialModule } from './app-material/app-material.module';
 
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
-
-// @NgModule({
-//   exports: [
-//     MatButtonModule,
-//     MatFormFieldModule,
-//     MatInputModule,
-//     MatRippleModule,
-//     MatDialog,
-//     MatDialogRef
-//   ],
-//   imports: [
-//     MatButtonModule,
-//     MatFormFieldModule,
-//     MatInputModule,
-//     MatRippleModule,
-//     MatDialog,
-//     MatDialogRef
-//   ],
-// })
-// export class MaterialModule {};
 
 @NgModule({
   declarations: [

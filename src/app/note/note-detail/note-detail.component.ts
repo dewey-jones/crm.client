@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../note.service';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { INote, Note } from '../note';
-
 
 @Component({
   selector: 'crm-note',
@@ -23,12 +21,13 @@ export class NoteDetailComponent implements OnInit {
     private _router: Router) {
    }
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.sub = this._route
       .queryParams
       .subscribe(params => {
-        // Defaults companyId to 0 if no query param provided (new contact).
+        // Defaults contactId to 0 if no query param provided (new contact).
         this.contactId = +params['contactId'] || 0;
+        console.log("this.contactId", this.contactId);
       });
 
     console.log(this._route.snapshot.paramMap.get('id'));
@@ -45,11 +44,11 @@ export class NoteDetailComponent implements OnInit {
     }
   }
   save(): void {
-    console.log(this.note);
+    console.log(this.contactId);
     console.log(this._route.snapshot.paramMap.get('id'));
-    let id = +this._route.snapshot.paramMap.get('id');
+    let noteId = +this._route.snapshot.paramMap.get('id');
     // if new note...
-    if(id === 0) {
+    if(noteId === 0) {
       this.note.contactId = this.contactId;
       this._noteService.createNote(this.note)
         .subscribe(note => {
@@ -57,12 +56,19 @@ export class NoteDetailComponent implements OnInit {
         },
         error => this.errorMessage = <any>error);
     } else {
+      console.log("updating note", this.note);
       this._noteService.updateNote(this.note)
         .subscribe(note => {
             this.note = note;
         },
         error => this.errorMessage = <any>error);
     }
+    console.log("route", '/contact/' + this.contactId);
+    this._router.navigate(['/contact/', this.contactId]);
+  }
+
+  back(): void {
+    this._router.navigate(['/contact/', this.contactId]);
   }
 
   delete(): void {
@@ -70,7 +76,9 @@ export class NoteDetailComponent implements OnInit {
     this._noteService.deleteNote(this.note.id)
       .subscribe(note => {
           this.note = note;
-      },
+          console.log("route", '/contact/' + this.contactId);
+          this._router.navigate(['/contact/', this.contactId]);
+    },
       error => this.errorMessage = <any>error);
   }
 

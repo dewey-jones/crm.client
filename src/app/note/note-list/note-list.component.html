@@ -3,7 +3,7 @@
     <ng-container matColumnDef="contactDate">
       <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
       <mat-cell *matCellDef="let note">
-        <a [routerLink]="['/note', note.id]">{{note.contactDate | date:'shortDate'}}</a>
+        <a [routerLink]="['/note', note.id]" [queryParams]="{contactId: note.contactId}">{{note.contactDate | date:'shortDate'}}</a>
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="noteText">

@@ -46,10 +46,10 @@ export class ContactDetailComponent implements OnInit {
   save(): void {
     console.log(this.contact);
     console.log(this._route.snapshot.paramMap.get('id'));
-    let id = +this._route.snapshot.paramMap.get('id');
+    let contactId = +this._route.snapshot.paramMap.get('id');
     // if new contact...
-    if(id === 0) {
-      this.contact.companyId = this.companyId
+    if(contactId === 0) {
+      this.contact.companyId = this.companyId;
       this._contactService.createContact(this.contact)
         .subscribe(contact => {
             this.contact = contact;
@@ -62,6 +62,12 @@ export class ContactDetailComponent implements OnInit {
         },
         error => this.errorMessage = <any>error);
     }
+    console.log("route", '/company/' + this.companyId);
+    this._router.navigate(['/company/', this.companyId]);
+  }
+
+  back(): void {
+    this._router.navigate(['/company/', this.companyId]);
   }
   
   delete(): void {

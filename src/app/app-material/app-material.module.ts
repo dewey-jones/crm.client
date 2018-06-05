@@ -7,12 +7,15 @@ import {
   MatButtonToggleModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatFormFieldModule, 
+  MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatMenuModule,
+  MatNativeDateModule,
   MatRippleModule,
-  MatTableModule
+  MatTableModule,
+  MatDatepickerModule,
+  MatToolbarModule
 } from '@angular/material';
 
 @NgModule({
@@ -21,26 +24,32 @@ import {
     MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatNativeDateModule,
     MatRippleModule,
-    MatTableModule
-    ],
+    MatTableModule,
+    MatToolbarModule
+  ],
   exports: [
     MatButtonModule,
     MatButtonToggleModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatMenuModule,
+    MatNativeDateModule,
     MatRippleModule,
-    MatTableModule
-    ],
+    MatTableModule,
+    MatToolbarModule
+  ],
   declarations: []
 })
 export class AppMaterialModule { }

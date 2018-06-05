@@ -2,9 +2,17 @@
   <div class="mat-headline flexRowCenter">{{pageTitle}}</div>
   <form #noteForm="ngForm" style="padding: 1em">
     <div class="formContainer">
-      <mat-form-field>
-        <input matInput placeholder="Date" name="date" [(ngModel)]="note.contactDate">
-      </mat-form-field>
+      <div style="display: flex; flex-direction: row;">
+        <div style="">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </div>
+        <div style="">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Date" name="contactDate" [(ngModel)]="note.contactDate">
+          </mat-form-field>
+        </div>
+      </div>
       <mat-form-field>
         <textarea matInput placeholder="Text" name="text" [(ngModel)]="note.noteText"></textarea>
       </mat-form-field>
@@ -16,6 +24,7 @@
     </div>
     <div class="flexRowAround" style="margin: 10px 0">
       <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
+      <button mat-raised-button color="" id="btnBack" (click)="back()">BACK</button>
       <button mat-raised-button color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
     </div>
   </form>

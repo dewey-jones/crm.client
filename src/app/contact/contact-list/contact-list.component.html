@@ -2,14 +2,14 @@
   <mat-table #table [dataSource]="contacts">
       <ng-container matColumnDef="fName">
           <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-              <a [routerLink]="['/contact', element.id]">{{element.fName + ' ' + element.lName}}</a>
+          <mat-cell *matCellDef="let contact">
+              <a [routerLink]="['/contact', contact.id]" [queryParams]="{companyId: contact.companyId}">{{contact.fName + ' ' + contact.lName}}</a>
           </mat-cell>
       </ng-container>
       <ng-container matColumnDef="title">
           <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
-          <mat-cell *matCellDef="let element">
-              {{element.title}}
+          <mat-cell *matCellDef="let contact">
+              {{contact.title}}
           </mat-cell>
       </ng-container>
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

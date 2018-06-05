@@ -10,15 +10,14 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   pageTitle: string = 'CRM';
-  selectedVal: string;
 
   constructor(private _router: Router) { }
 
-  public onValChange(val: string) : void {
-    this.selectedVal = val;
-    const navArray = [];
-    navArray.push(val);
-    this._router.navigate(navArray);
-  
+  public goHome() {
+    this._router.navigateByUrl('/')
+  }
+
+  public gotoCompany() {
+    this._router.navigateByUrl('/company')
   }
 }
