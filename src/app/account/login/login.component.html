@@ -1,0 +1,23 @@
+<div class='panel panel-primary'>
+    <div class="mat-headline flexRowCenter">{{pageTitle}}</div>
+    <form #registrationForm="ngForm" style="padding: 1em">
+      <div class="formContainer">
+        <mat-form-field>
+          <input matInput placeholder="Email" name="email" [(ngModel)]="registration.email">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="User Name" name="userName" [(ngModel)]="registration.userName">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Password" name="password" [(ngModel)]="registration.password">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Confirm Password" name="confirmPassword" [(ngModel)]="registration.confirmPassword">
+        </mat-form-field>
+        <div style="display: flex; flex-direction: row; justify-content: space-around">
+          <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
+          <button mat-raised-button color="" id="btnBack" (click)="back()">BACK</button>
+        </div>
+      </div>
+    </form>
+  </div>

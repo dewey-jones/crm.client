@@ -30,17 +30,17 @@ export class NoteDetailComponent implements OnInit {
         console.log("this.contactId is", this.contactId);
       });
 
-    console.log(this._route.snapshot.paramMap.get('id'));
     let id = +this._route.snapshot.paramMap.get('id');
     this.pageTitle += `: ${id}`;
     if(id != 0) {
       this._noteService.getNote(id)
       .subscribe(note => {
           this.note = note;
-      },
+        },
       error => this.errorMessage = <any>error);
     } else {
       this.note = new Note();
+      this.note.contactDate = new Date();
     }
   }
   save(): void {

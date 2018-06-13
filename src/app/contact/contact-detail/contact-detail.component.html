@@ -1,6 +1,6 @@
 <div class='panel panel-primary' *ngIf='contact'>
   <div class="mat-headline flexRowCenter">{{pageTitle}}</div>
-  <form #contactForm="ngForm" style="padding: 1em">
+  <form #contactForm="ngForm" (ngSubmit)="save()" style="padding: 1em">
     <div class="formContainer">
       <mat-form-field>
         <input matInput placeholder="Last Name" name="lName" [(ngModel)]="contact.lName">
@@ -36,9 +36,9 @@
       <mat-checkbox [(ngModel)]="contact.shouldContact" name="shouldContact">Should Contact</mat-checkbox>
     </div>
     <div class="flexRowAround" style="margin: 10px 0">
-        <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
-        <button mat-raised-button color="" id="btnBack" (click)="back()">BACK</button>
-        <button mat-raised-button color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
+        <button mat-raised-button color="primary" type="submit" id="btnSave">SAVE</button>
+        <button mat-raised-button color="" type="button" id="btnBack" (click)="back()">BACK</button>
+        <button mat-raised-button color="warn" type="button" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
     </div>
     <div id="note-list">
       <crm-note-list [contactId]='contact.id'></crm-note-list>
