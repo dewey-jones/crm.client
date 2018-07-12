@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertService } from '../_services/index';
+// import { AlertService } from '../_services/index';
 import { AccountService } from '../account.service';
 import { IRegistration } from '../registration';
 
@@ -15,8 +15,8 @@ export class RegisterComponent implements OnInit {
   
   constructor(
     private router: Router,
-    private accountService: AccountService,
-    private alertService: AlertService) { }
+    private accountService: AccountService
+  ) {}
 
   ngOnInit() {
   }
@@ -27,11 +27,11 @@ export class RegisterComponent implements OnInit {
         .subscribe(
             data => {
                 // set success message and pass true paramater to persist the message after redirecting to the login page
-                this.alertService.success('Registration successful', true);
+                // this.alertService.success('Registration successful', true);
                 this.router.navigate(['/login']);
             },
             error => {
-                this.alertService.error(error);
+                // this.alertService.error(error);
                 // this.loading = false;
             });
 }

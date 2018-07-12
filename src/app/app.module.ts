@@ -25,7 +25,7 @@ import { NoteService } from './note/note.service';
 import { AppMaterialModule } from './app-material/app-material.module';
 
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
 
 @NgModule({

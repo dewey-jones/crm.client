@@ -9,7 +9,7 @@ import 'rxjs/add/operator/do';
 import { IRegistration } from "./registration";
 
 @Injectable()
-export class CompanyService {
+export class AccountService {
     private _accountUrl = appSettings.serverPath + '/api/account';
     
     constructor(private _http: HttpClient) {}
