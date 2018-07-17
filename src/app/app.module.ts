@@ -54,6 +54,8 @@ import { LoginComponent } from './account/login/login.component';
     AppMaterialModule,
     BrowserAnimationsModule,
     RouterModule.forRoot([
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'products', component: ProductListComponent },
       { path: 'products/:id', component: ProductDetailComponent },
       { path: 'welcome', component: WelcomeComponent },

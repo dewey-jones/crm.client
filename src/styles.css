@@ -6,7 +6,7 @@ div.panel-heading {
    font-size: x-large;
 }
 .fieldInvalid {
-    color: red;
+    color: blue;
     padding: 0 15px;
     margin-top: 5px;
 }
