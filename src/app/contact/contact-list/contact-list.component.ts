@@ -10,7 +10,7 @@ import { ContactService } from '../contact.service';
 })
 export class ContactListComponent implements OnInit, OnChanges {
   @Input() companyId: number;
-
+  displayedColumns = ['fName', 'title'];
   contacts: IContact[] = [];
   errorMessage: string;
   
@@ -24,7 +24,6 @@ export class ContactListComponent implements OnInit, OnChanges {
             this.contacts = contacts;
         },
         error => this.errorMessage = <any>error);
-    
   }
 
   addContact(): void {

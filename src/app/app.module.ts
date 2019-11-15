@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
@@ -21,6 +22,12 @@ import { NoteDetailComponent } from './note/note-detail/note-detail.component';
 import { NoteListComponent } from './note/note-list/note-list.component';
 import { NoteService } from './note/note.service';
 
+import { AppMaterialModule } from './app-material/app-material.module';
+
+import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
+import { RegisterComponent } from './account/register/register.component';
+import { LoginComponent } from './account/login/login.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,13 +42,20 @@ import { NoteService } from './note/note.service';
     CompanyDetailComponent,
     CompanyEditComponent,
     NoteDetailComponent,
-    NoteListComponent
+    NoteListComponent,
+    ConfirmationDialogComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AppMaterialModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot([
+      { path: 'register', component: RegisterComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'products', component: ProductListComponent },
       { path: 'products/:id', component: ProductDetailComponent },
       { path: 'welcome', component: WelcomeComponent },
@@ -54,8 +68,19 @@ import { NoteService } from './note/note.service';
       { path: '', redirectTo: 'welcome', pathMatch: 'full' },
       { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
     ])
+    // MatButtonModule,
+    // MatFormFieldModule,
+    // MatInputModule,
+    // MatRippleModule,
+    // MatDialog,
+    // MatDialogRef
   ],
+  // exports: [
+  //   MatDialog,
+  //   MatDialogRef
+  // ],
   providers: [ ContactService, CompanyService, NoteService ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ ConfirmationDialogComponent]
 })
 export class AppModule { }

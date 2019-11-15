@@ -1,0 +1,10 @@
+Authentication
+
+DEPLOYMENT
+==========
+Root folder
+"A" record
+	subdomain
+Database
+	Rename tables prefix with "crm"
+Control panel for managing PWH
