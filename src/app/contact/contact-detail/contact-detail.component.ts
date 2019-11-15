@@ -21,7 +21,7 @@ export class ContactDetailComponent implements OnInit {
 
   constructor(private _contactService: ContactService, 
     private _companyService: CompanyService,
-    private _route: ActivatedRoute, 
+    private _route: ActivatedRoute,
     private _router: Router) {
    }
 
@@ -68,23 +68,25 @@ export class ContactDetailComponent implements OnInit {
       this._contactService.createContact(this.contact)
         .subscribe(contact => {
             this.contact = contact;
-        },
+            console.log("route", '/company/' + this.companyId);
+            this._router.navigate(['/company/', this.companyId]);
+          },
         error => this.errorMessage = <any>error);
     } else {
       this._contactService.updateContact(this.contact)
         .subscribe(contact => {
             this.contact = contact;
-        },
+            console.log("route", '/company/' + this.companyId);
+            this._router.navigate(['/company/', this.companyId]);
+          },
         error => this.errorMessage = <any>error);
     }
-    console.log("route", '/company/' + this.companyId);
-    this._router.navigate(['/company/', this.companyId]);
   }
 
   back(): void {
     this._router.navigate(['/company/', this.companyId]);
   }
-  
+
   delete(): void {
     console.log(this.contact);
     this._contactService.deleteContact(this.contact.id)

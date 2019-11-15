@@ -42,10 +42,16 @@
       <mat-checkbox [(ngModel)]="contact.shouldContact" name="shouldContact">Should Contact</mat-checkbox>
     </div>
     <div class="flexRowAround" style="margin: 10px 0">
+<<<<<<< HEAD
       <button mat-raised-button color="primary" type="submit" id="btnSave">SAVE</button>
       <button mat-raised-button color="" type="button" id="btnBack" (click)="back()">BACK</button>
       <button mat-raised-button color="warn" type="button" id="btnDelete"
         (click)="openConfirmationDialog()">DELETE</button>
+=======
+        <button mat-raised-button color="primary" type="submit" id="btnSave" [disabled]="contactForm.pristine || contactForm.invalid">SAVE</button>
+        <button mat-raised-button color="" type="button" id="btnBack" (click)="back()">BACK</button>
+        <button mat-raised-button color="warn" type="button" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
+>>>>>>> ae3f439f4377e3b0b0ac656e31c0d58b4aee3432
     </div>
     <div id="note-list">
       <crm-note-list [contactId]='contact.id'></crm-note-list>

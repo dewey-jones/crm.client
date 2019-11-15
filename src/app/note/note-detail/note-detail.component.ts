@@ -66,18 +66,20 @@ export class NoteDetailComponent implements OnInit {
       this._noteService.createNote(this.note)
         .subscribe(note => {
             this.note = note;
-        },
+            console.log("route", '/contact/' + this.contactId);
+            this._router.navigate(['/contact/', this.contactId]);
+               },
         error => this.errorMessage = <any>error);
     } else {
       console.log("updating note", this.note);
       this._noteService.updateNote(this.note)
         .subscribe(note => {
             this.note = note;
-        },
+            console.log("route", '/contact/' + this.contactId);
+            this._router.navigate(['/contact/', this.contactId]);
+            },
         error => this.errorMessage = <any>error);
     }
-    console.log("route", '/contact/' + this.contactId);
-    this._router.navigate(['/contact/', this.contactId]);
   }
 
   back(): void {

@@ -3,11 +3,11 @@
   <form #noteForm="ngForm" (ngSubmit)="save()" style="padding: 1em">
     <div class="formContainer">
       <div style="display: flex; flex-direction: row;">
-        <div style="">
+        <div>
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </div>
-        <div style="">
+        <div>
           <mat-form-field>
             <input matInput [matDatepicker]="picker" placeholder="Date" name="contactDate" [(ngModel)]="note.contactDate">
           </mat-form-field>
