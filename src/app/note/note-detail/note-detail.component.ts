@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NoteService } from '../note.service';
+import { ContactService } from '../../contact/contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { INote, Note } from '../note';
+import { IContact } from '../../contact/contact';
 
 @Component({
   selector: 'crm-note',
@@ -9,14 +11,17 @@ import { INote, Note } from '../note';
   styleUrls: ['./note-detail.component.css']
 })
 export class NoteDetailComponent implements OnInit {
-  pageTitle: string = 'Note Detail';
+  pageTitle: string = 'Note for';
   errorMessage: string;
   contactId: number;
   sub: any;  // subscription
+  fullname: string;
 
   note: INote;
+  contact: IContact;
 
   constructor(private _noteService: NoteService, 
+    private _contactService: ContactService,
     private _route: ActivatedRoute, 
     private _router: Router) {
    }
@@ -37,8 +42,16 @@ export class NoteDetailComponent implements OnInit {
       .subscribe(note => {
           this.note = note;
         },
-      error => this.errorMessage = <any>error);
-    } else {
+      error => this.errorMessage = <any>error,
+      () => this._contactService.getContact(this.contactId)
+      .subscribe(contact => {
+        this.contact = contact;
+        this.fullname = this.contact.fName + ' ' + this.contact.lName;
+        console.log("fullname is", this.fullname);
+        this.pageTitle = this.fullname;
+      })
+      )
+   } else {
       this.note = new Note();
       this.note.contactDate = new Date();
     }

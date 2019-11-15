@@ -1,0 +1,27 @@
+<div style="display: flex; flex-direction: column;" class="mat-elevation-z1">
+  <mat-table #table [dataSource]="ratings">
+    <ng-container matColumnDef="ratingValue">
+      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-cell *matCellDef="let rating">
+        {{rating.ratingValue}}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let rating">
+        <span style="max-width: 50px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
+          {{rating.description}}
+        </span>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+<!--   <div style="margin: 10px 0" class="flexRowCenter">
+    <button type="button" mat-fab id="btnAddRating" (click)="addRating()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+ -->
+</div>

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
+import { CompanyService } from '../../company/company.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IContact, Contact } from '../contact';
+import { ICompany } from '../../company/company';
 
 @Component({
   selector: 'crm-contact-detail',
@@ -15,8 +17,10 @@ export class ContactDetailComponent implements OnInit {
   sub: any;  // subscription
 
   contact: IContact;
+  company: ICompany;
 
   constructor(private _contactService: ContactService, 
+    private _companyService: CompanyService,
     private _route: ActivatedRoute, 
     private _router: Router) {
    }
@@ -32,6 +36,7 @@ export class ContactDetailComponent implements OnInit {
     console.log(this._route.snapshot.paramMap.get('id'));
     let id = +this._route.snapshot.paramMap.get('id');
     this.pageTitle += `: ${id}`;
+
     if(id != 0) {
       this._contactService.getContact(id)
       .subscribe(contact => {
@@ -39,10 +44,18 @@ export class ContactDetailComponent implements OnInit {
           this.companyId = contact.companyId;
           console.log("companyId is", this.companyId);
         },
-      error => this.errorMessage = <any>error);
+      error => this.errorMessage = <any>error,
+      () => this._companyService.getCompany(this.companyId)
+      .subscribe(company => {
+        this.company = company;
+        console.log("companyName is", this.company.companyName);
+        this.pageTitle = this.company.companyName;
+      })
+      )
     } else {
       this.contact = new Contact();
-    }
+      this.pageTitle = "New Contact";
+    };
   }
 
   save(): void {

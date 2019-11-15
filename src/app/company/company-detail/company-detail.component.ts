@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICompany } from '../company';
+import { ICompany, Company } from '../company';
 import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
@@ -27,12 +27,19 @@ export class CompanyDetailComponent implements OnInit {
     console.log(this._route.snapshot.paramMap.get('id'));
     let id = +this._route.snapshot.paramMap.get('id');
     //this.pageTitle += `: ${id}`;
-    this._companyService.getCompany(id)
+ 
+    if(id != 0) {
+      this._companyService.getCompany(id)
         .subscribe(company => {
             this.company = company;
         },
         error => this.errorMessage = <any>error);
+      } else {
+        this.company = new Company();
+        this.pageTitle = "New Contact";
+       }
   }
+
   save(): void {
     console.log(this.company);
     this._companyService.saveCompany(this.company)
