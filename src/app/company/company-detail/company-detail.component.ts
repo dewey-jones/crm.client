@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ICompany, Company } from '../company';
 import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'crm-company-detail',
@@ -16,37 +17,40 @@ export class CompanyDetailComponent implements OnInit {
 
   company: ICompany;
   dialogRef: M2<ConfirmationDialogComponent>;
-  
-  constructor(private _companyService: CompanyService, 
-    private _route: ActivatedRoute, 
+
+  constructor(private _companyService: CompanyService,
+    private _route: ActivatedRoute,
     private _router: Router,
+    private appService: AppService,
     public dialog: M1) {
-   }
-  
+  }
+
   ngOnInit(): void {
     console.log(this._route.snapshot.paramMap.get('id'));
     let id = +this._route.snapshot.paramMap.get('id');
-    //this.pageTitle += `: ${id}`;
- 
-    if(id != 0) {
+
+    if (id != 0) {
       this._companyService.getCompany(id)
         .subscribe(company => {
-            this.company = company;
+          this.company = company;
         },
-        error => this.errorMessage = <any>error);
-      } else {
-        this.company = new Company();
-        this.pageTitle = "New Contact";
-       }
+          error => this.errorMessage = <any>error);
+    } else {
+      this.company = new Company();
+      this.pageTitle = "New Contact";
+    }
+
+    this.appService.setTitle(this.pageTitle);
+
   }
 
   save(): void {
     console.log(this.company);
     this._companyService.saveCompany(this.company)
       .subscribe(company => {
-          this.company = company;
+        this.company = company;
       },
-      error => this.errorMessage = <any>error);
+        error => this.errorMessage = <any>error);
   }
   back(): void {
     this._router.navigate(['/company']);
@@ -55,9 +59,9 @@ export class CompanyDetailComponent implements OnInit {
     console.log(this.company);
     this._companyService.deleteCompany(this.company.id)
       .subscribe(company => {
-          this.company = company;
+        this.company = company;
       },
-      error => this.errorMessage = <any>error);
+        error => this.errorMessage = <any>error);
   }
   openConfirmationDialog() {
     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -66,7 +70,7 @@ export class CompanyDetailComponent implements OnInit {
     this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete?"
 
     this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.delete();
       }
       this.dialogRef = null;

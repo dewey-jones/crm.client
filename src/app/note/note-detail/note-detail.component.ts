@@ -4,6 +4,7 @@ import { ContactService } from '../../contact/contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { INote, Note } from '../note';
 import { IContact } from '../../contact/contact';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'crm-note',
@@ -11,7 +12,8 @@ import { IContact } from '../../contact/contact';
   styleUrls: ['./note-detail.component.css']
 })
 export class NoteDetailComponent implements OnInit {
-  pageTitle: string = 'Note for';
+  pageTitle: string = 'Note Detail';
+  pageHeading: string = '';
   errorMessage: string;
   contactId: number;
   sub: any;  // subscription
@@ -23,7 +25,8 @@ export class NoteDetailComponent implements OnInit {
   constructor(private _noteService: NoteService, 
     private _contactService: ContactService,
     private _route: ActivatedRoute, 
-    private _router: Router) {
+    private _router: Router,
+    private _appService: AppService) {
    }
 
   ngOnInit(): void {
@@ -36,7 +39,7 @@ export class NoteDetailComponent implements OnInit {
       });
 
     let id = +this._route.snapshot.paramMap.get('id');
-    this.pageTitle += `: ${id}`;
+    // this.pageTitle += `: ${id}`;
     if(id != 0) {
       this._noteService.getNote(id)
       .subscribe(note => {
@@ -48,14 +51,17 @@ export class NoteDetailComponent implements OnInit {
         this.contact = contact;
         this.fullname = this.contact.fName + ' ' + this.contact.lName;
         console.log("fullname is", this.fullname);
-        this.pageTitle = this.fullname;
+        this.pageHeading = this.fullname;
       })
       )
    } else {
       this.note = new Note();
       this.note.contactDate = new Date();
     }
+
+    this._appService.setTitle(this.pageTitle);
   }
+
   save(): void {
     console.log(this.contactId);
     console.log(this._route.snapshot.paramMap.get('id'));

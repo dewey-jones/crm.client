@@ -2,6 +2,7 @@ import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { IContact } from "../contact";
 import { ContactService } from '../contact.service';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'crm-contact-list',
@@ -15,7 +16,8 @@ export class ContactListComponent implements OnInit, OnChanges {
   errorMessage: string;
   
   constructor(private _contactService: ContactService,
-    private _router: Router) { }
+    private _router: Router,
+    private _appService: AppService) { }
 
   ngOnInit() {
     console.log(this.companyId);

@@ -17,7 +17,7 @@ export class CompanyListComponent implements OnInit {
   
   constructor(private _companyService: CompanyService,
     private _router: Router,
-    private appService: AppService) { }
+    private _appService: AppService) { }
 
   ngOnInit(): void {
     this._companyService.getCompanies()
@@ -26,7 +26,7 @@ export class CompanyListComponent implements OnInit {
         },
         error => this.errorMessage = <any>error);
   
-        this.appService.setTitle(this.pageTitle);
+    this._appService.setTitle(this.pageTitle);
   }
 
   addCompany(): void {

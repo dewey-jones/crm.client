@@ -11,7 +11,6 @@ import { StarComponent } from './shared/star.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
-import { CompanyEditComponent } from './company/company-edit/company-edit.component';
 import { CompanyService } from './company/company.service';
 import { ContactListComponent } from './contact/contact-list/contact-list.component';
 import { ContactDetailComponent } from './contact/contact-detail/contact-detail.component';
@@ -36,7 +35,6 @@ import { LoginComponent } from './account/login/login.component';
     ContactListComponent,
     ContactDetailComponent,
     CompanyDetailComponent,
-    CompanyEditComponent,
     NoteDetailComponent,
     NoteListComponent,
     ConfirmationDialogComponent,
