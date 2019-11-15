@@ -1,5 +1,19 @@
 <div>
   <div>
+    <mat-toolbar style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 12px">
+      <button type="button" mat-icon-button id="btnMenu" (click)="addCompany()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      {{pageTitle}}
+      <button type="button" mat-icon-button id="btnSearch" >
+        <mat-icon>search</mat-icon>
+      </button>
+      <button type="button" mat-icon-button id="btnMore" (click)="addCompany()">
+        <mat-icon>more</mat-icon>
+      </button>
+    </mat-toolbar>
+  </div>
+  <div>
     <mat-toolbar style="display: flex; flex-direction: row; justify-content: space-around; margin-bottom: 12px">
       <button mat-button (click)="goHome()">
         Home

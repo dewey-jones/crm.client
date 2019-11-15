@@ -6,10 +6,8 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { ProductListComponent } from './products/product-list.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
 import { StarComponent } from './shared/star.component';
-import { ProductDetailComponent } from './products/product-detail/product-detail.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
@@ -31,8 +29,6 @@ import { LoginComponent } from './account/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent,
-    ProductDetailComponent,
     ConvertToSpacesPipe,
     StarComponent,
     WelcomeComponent,
@@ -56,8 +52,6 @@ import { LoginComponent } from './account/login/login.component';
     RouterModule.forRoot([
       { path: 'register', component: RegisterComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'products', component: ProductListComponent },
-      { path: 'products/:id', component: ProductDetailComponent },
       { path: 'welcome', component: WelcomeComponent },
       { path: 'company', component: CompanyListComponent },
       { path: 'company/:id', component: CompanyDetailComponent },

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICompany } from '../company';
 import { CompanyService } from '../company.service';
+import {AppService} from '../../app.service';
 
 @Component({
   selector: 'pm-company-list',
@@ -15,7 +16,8 @@ export class CompanyListComponent implements OnInit {
   companies: ICompany[] = [];
   
   constructor(private _companyService: CompanyService,
-    private _router: Router) { }
+    private _router: Router,
+    private appService: AppService) { }
 
   ngOnInit(): void {
     this._companyService.getCompanies()
@@ -23,7 +25,8 @@ export class CompanyListComponent implements OnInit {
             this.companies = companies;
         },
         error => this.errorMessage = <any>error);
-    
+  
+        this.appService.setTitle(this.pageTitle);
   }
 
   addCompany(): void {
