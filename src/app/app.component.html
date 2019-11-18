@@ -20,12 +20,19 @@
           <button type="button" mat-icon-button id="btnSearch">
             <mat-icon>search</mat-icon>
           </button>
-          <button type="button" mat-icon-button id="btnMore" (click)="addCompany()">
-            <mat-icon>more</mat-icon>
-          </button>
+          <div>
+            <button type="button" mat-icon-button id="btnMore" [matMenuTriggerFor]="appMenu" [matMenuTriggerData]="menuData">
+              <mat-icon>more_horiz</mat-icon>
+            </button>
+            <mat-menu #appMenu="matMenu" xPosition="before">
+                <ng-template matMenuContent let-aliasMenuItems="menuItems">
+                  <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="item.action">
+                    {{item.text}}
+                  </button>
+                </ng-template>
+            </mat-menu>
+          </div>
         </mat-toolbar>
-      </div>
-      <div>
       </div>
       <div>
         <router-outlet></router-outlet>

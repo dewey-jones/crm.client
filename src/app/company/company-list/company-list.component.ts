@@ -27,6 +27,10 @@ export class CompanyListComponent implements OnInit {
         error => this.errorMessage = <any>error);
   
     this._appService.setTitle(this.pageTitle);
+
+    this._appService.setMenuData([
+        {text: 'Add Company', action: 'addCompany()'}
+      ]);
   }
 
   addCompany(): void {
