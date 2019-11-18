@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { CompanyService } from './company/company.service';
 import { Router } from '@angular/router';
-import { AppService } from "./app.service"
+import { AppService } from "./app.service";
+// import { MatSidenavContainer as sidenavContainer, MatDialogRef as M2 } from '@angular/material';
 
 @Component ({
   selector: 'pm-root',
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
   providers: [CompanyService, AppService]
 })
 export class AppComponent {
   pageTitle: string = 'CRM';
+  /*
+  */  events: string[] = [];
+  opened: boolean;
 
   constructor(private _router: Router, private appService: AppService) { }
 
