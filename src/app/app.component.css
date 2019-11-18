@@ -1,3 +1,9 @@
+.mat-app-background {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
 .example-container {
   position: absolute;
   top: 0;

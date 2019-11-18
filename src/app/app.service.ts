@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class AppService {
-  private title = new BehaviorSubject<string>('Page title');
+  private title = new BehaviorSubject<string>('Home');
   private title$ = this.title.asObservable();
 
   constructor() {}

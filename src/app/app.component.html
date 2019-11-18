@@ -1,8 +1,14 @@
-<div>
+<div class="mat-app-background">
   <mat-drawer-container>
-    <mat-drawer #drawer mode="push" [(opened)]="opened" (opened)="events.push('open!')"
-      (closed)="events.push('close!')">
-      Sidenav content
+    <mat-drawer #drawer mode="push" [(opened)]="opened">
+      <mat-toolbar style="display: flex; flex-direction: column; justify-items:left;">
+        <button mat-button (click)="goHome()">
+          Home
+        </button>
+        <button mat-button (click)="gotoCompany()">
+          Companies
+        </button>
+      </mat-toolbar>
     </mat-drawer>
     <mat-drawer-content>
       <div>
@@ -20,14 +26,6 @@
         </mat-toolbar>
       </div>
       <div>
-        <mat-toolbar style="display: flex; flex-direction: row; justify-content: space-around; margin-bottom: 12px">
-          <button mat-button (click)="goHome()">
-            Home
-          </button>
-          <button mat-button (click)="gotoCompany()">
-            Companies
-          </button>
-        </mat-toolbar>
       </div>
       <div>
         <router-outlet></router-outlet>

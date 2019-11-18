@@ -12,8 +12,6 @@ import { AppService } from "./app.service";
 })
 export class AppComponent {
   pageTitle: string = 'CRM';
-  /*
-  */  events: string[] = [];
   opened: boolean;
 
   constructor(private _router: Router, private appService: AppService) { }
