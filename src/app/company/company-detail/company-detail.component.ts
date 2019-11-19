@@ -21,7 +21,7 @@ export class CompanyDetailComponent implements OnInit {
   constructor(private _companyService: CompanyService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private appService: AppService,
+    private _appService: AppService,
     public dialog: M1) {
   }
 
@@ -37,11 +37,14 @@ export class CompanyDetailComponent implements OnInit {
           error => this.errorMessage = <any>error);
     } else {
       this.company = new Company();
-      this.pageTitle = "New Contact";
+      this.pageTitle = "New Company";
     }
 
-    this.appService.setTitle(this.pageTitle);
+    this._appService.setTitle(this.pageTitle);
 
+    this._appService.setMenuData({
+      menuItems: []
+    });
   }
 
   save(): void {

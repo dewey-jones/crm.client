@@ -16,6 +16,7 @@ export class AppComponent {
   pageTitle: string = 'CRM';
   menuData: any = [{}];
   opened: boolean;
+  @Input test: boolean = true;
 
   constructor(private _router: Router, private appService: AppService) { }
 
@@ -38,7 +39,12 @@ export class AppComponent {
     this.trigger.openMenu();
   }
 
-  handleMenuAction(action: Function) {
-      action();
+  routeToPath(path: string) {
+    this._router.navigateByUrl(path)
+  }
+
+  isPageMenuDisabled() {
+    console.log(this.menuData);
+    return this.menuData.menuItems.length = 0;
   }
 }

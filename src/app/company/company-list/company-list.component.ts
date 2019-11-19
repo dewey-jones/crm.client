@@ -30,7 +30,7 @@ export class CompanyListComponent implements OnInit {
 
     this._appService.setMenuData({
       menuItems: [
-        {text: "Add Company", action: this.addCompany}
+        {text: "Add Company", path: '/company/0'}
     ]});
   }
 
