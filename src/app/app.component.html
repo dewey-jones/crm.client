@@ -26,7 +26,7 @@
             </button>
             <mat-menu #appMenu="matMenu" xPosition="before">
                 <ng-template matMenuContent let-aliasMenuItems="menuItems">
-                  <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="item.action">
+                  <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="handleMenuAction(item.action)">
                     {{item.text}}
                   </button>
                 </ng-template>

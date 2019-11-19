@@ -28,9 +28,10 @@ export class CompanyListComponent implements OnInit {
   
     this._appService.setTitle(this.pageTitle);
 
-    this._appService.setMenuData([
-        {text: 'Add Company', action: 'addCompany()'}
-      ]);
+    this._appService.setMenuData({
+      menuItems: [
+        {text: "Add Company", action: this.addCompany}
+    ]});
   }
 
   addCompany(): void {

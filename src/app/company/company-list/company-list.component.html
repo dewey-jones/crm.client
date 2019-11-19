@@ -1,10 +1,3 @@
-<div style='display: flex; justify-content: space-around; align-items: center; margin-bottom: 10px;'>
-  <div style='align-self: center;'>
-      <button type="button" mat-fab id="btnAddCompany" (click)="addCompany()">
-          <mat-icon>add</mat-icon>
-      </button>
-  </div>
-</div>
 <div style="display: flex; flex-direction: column;" class="mat-elevation-z8">
 	<mat-table #table [dataSource]="companies">
 		<ng-container matColumnDef="companyName">

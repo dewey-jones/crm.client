@@ -37,4 +37,8 @@ export class AppComponent {
   openContextMenu() {
     this.trigger.openMenu();
   }
+
+  handleMenuAction(action: Function) {
+      action();
+  }
 }
