@@ -16,7 +16,6 @@ export class AppComponent {
   pageTitle: string = 'CRM';
   menuData: any = [{}];
   opened: boolean;
-  @Input test: boolean = true;
 
   constructor(private _router: Router, private appService: AppService) { }
 
