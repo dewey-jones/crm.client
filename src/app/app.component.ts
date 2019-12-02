@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CompanyService } from './company/company.service';
 import { Router } from '@angular/router';
 import { AppService } from "./app.service";
-import { MatMenuTrigger } from '@angular/material';
+import { MatMenuTrigger } from '@angular/material/menu';
 // import { MatSidenavContainer as sidenavContainer, MatDialogRef as M2 } from '@angular/material';
 
 @Component ({
