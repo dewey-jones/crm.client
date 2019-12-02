@@ -1,10 +1,13 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {catchError, tap} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
 import { appSettings } from "../app-settings";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
+
+
+
 
 import { IRating } from "./rating";
 
@@ -15,9 +18,9 @@ export class RatingService {
     constructor(private _http: HttpClient) {}
 
     getRatings(contactId: number): Observable<IRating[]> {
-        return this._http.get<IRating[]>(this._ratingUrl + "?sort=value")
-        .do(data => console.log('All: ' + JSON.stringify(data)))
-        .catch(this.handleError);
+        return this._http.get<IRating[]>(this._ratingUrl + "?sort=value").pipe(
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError),);
 }
     /*
     getRating(id: number): Observable<IRating> {
@@ -52,6 +55,6 @@ export class RatingService {
 
     private handleError(err: HttpErrorResponse) {
         console.log(err.message);
-        return Observable.throw(err.message);
+        return observableThrowError(err.message);
     }
 }

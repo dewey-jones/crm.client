@@ -1,10 +1,13 @@
+
+import {throwError as observableThrowError,  Observable } from 'rxjs';
+
+import {catchError, tap} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
 import { appSettings } from "../app-settings";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/do';
+
+
+
 
 import { IRegistration } from "./registration";
 
@@ -16,9 +19,9 @@ export class AccountService {
 
     register(registration: IRegistration): any {
       console.log("registration", registration);
-      return this._http.post<IRegistration>(this._accountUrl, registration)
-          .do(data => console.log('All: ' + JSON.stringify(data)))
-          .catch(this.handleError);
+      return this._http.post<IRegistration>(this._accountUrl, registration).pipe(
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError),);
     }
 
     // getCompany(id: number): Observable<ICompany> {
@@ -44,6 +47,6 @@ export class AccountService {
 
     private handleError(err: HttpErrorResponse) {
         console.log(err.message);
-        return Observable.throw(err.message);
+        return observableThrowError(err.message);
     }
 }
