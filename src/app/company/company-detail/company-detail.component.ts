@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyService } from '../company.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ICompany, Company } from '../company';
-import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material';
+import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 import { AppService } from '../../app.service';
 
