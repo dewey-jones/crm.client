@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -24,6 +23,7 @@ import { AppMaterialModule } from './app-material/app-material.module';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -47,30 +47,8 @@ import { LoginComponent } from './account/login/login.component';
     HttpClientModule,
     AppMaterialModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot([
-      { path: 'register', component: RegisterComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'welcome', component: WelcomeComponent },
-      { path: 'company', component: CompanyListComponent },
-      { path: 'company/:id', component: CompanyDetailComponent },
-      { path: 'contact', component: ContactListComponent },
-      { path: 'contact/:id', component: ContactDetailComponent },
-      { path: 'note', component: NoteListComponent },
-      { path: 'note/:id', component: NoteDetailComponent },
-      { path: '', redirectTo: 'welcome', pathMatch: 'full' },
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
-    ])
-    // MatButtonModule,
-    // MatFormFieldModule,
-    // MatInputModule,
-    // MatRippleModule,
-    // MatDialog,
-    // MatDialogRef
+    AppRoutingModule
   ],
-  // exports: [
-  //   MatDialog,
-  //   MatDialogRef
-  // ],
   providers: [ ContactService, CompanyService, NoteService ],
   bootstrap: [AppComponent],
   entryComponents: [ ConfirmationDialogComponent]
