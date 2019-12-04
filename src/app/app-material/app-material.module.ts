@@ -35,7 +35,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     MatToolbarModule,
     MatSidenavModule,
     MatTooltipModule
-      ],
+    ],
   exports: [
     MatButtonModule,
     MatButtonToggleModule,

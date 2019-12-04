@@ -5,6 +5,9 @@ import { CompanyService } from '../company.service';
 import { AppService } from '../../app.service';
 import { RatingService } from '../../rating/rating.service';
 import { IRating } from '../../rating/rating';
+import { ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'pm-company-list',
@@ -14,20 +17,23 @@ import { IRating } from '../../rating/rating';
 export class CompanyListComponent implements OnInit {
   pageTitle: string = 'Company List';
   errorMessage: string;
-  displayedColumns = ['companyName', 'rating'];
-  companies: ICompany[] = [];
+  public displayedColumns = ['companyName', 'rating'];
+  // companies: ICompany[] = [];
   ratings: IRating[] = [];
   ratingFromService: string;
+  public dataSource = new MatTableDataSource<ICompany>();
 
   constructor(private _companyService: CompanyService,
     private _ratingService: RatingService,
     private _router: Router,
     private _appService: AppService) { }
 
+  @ViewChild(MatSort, { static: true }) tablesort: MatSort;
+
   ngOnInit(): void {
     this._companyService.getCompanies()
       .subscribe(companies => {
-        this.companies = companies;
+        this.dataSource.data = companies;
       },
         error => this.errorMessage += <any>error);
 
@@ -37,13 +43,22 @@ export class CompanyListComponent implements OnInit {
       },
         error => this.errorMessage += <any>error);
 
-
     this._appService.setTitle(this.pageTitle);
 
     this._appService.setMenuData({
       menuItems: [
         { text: "Add Company", path: '/company/0' }
       ]
+    });
+  }
+
+  ngAfterViewInit(): void {
+    this._companyService.getCompanies().subscribe(companies => {
+      this.dataSource.data = companies;
+      if (this.tablesort) // check it is defined.
+      {
+        this.dataSource.sort = this.tablesort;
+      }
     });
   }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CompanyService } from './company/company.service';
+// import { CompanyService } from './company/company.service';
 import { Router } from '@angular/router';
 import { AppService } from "./app.service";
 import { MatMenuTrigger } from '@angular/material/menu';
@@ -9,7 +9,7 @@ import { MatMenuTrigger } from '@angular/material/menu';
   selector: 'pm-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [CompanyService, AppService]
+  providers: [AppService]
 })
 export class AppComponent {
   trigger: MatMenuTrigger;
