@@ -24,6 +24,8 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
+import { RatingListComponent } from './rating/rating-list/rating-list.component';
+import { RatingService } from './rating/rating.service';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,7 @@ import { AppRoutingModule } from './app-routing.module';
     CompanyDetailComponent,
     NoteDetailComponent,
     NoteListComponent,
+    RatingListComponent,
     ConfirmationDialogComponent,
     RegisterComponent,
     LoginComponent
@@ -49,7 +52,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserAnimationsModule,
     AppRoutingModule
   ],
-  providers: [ ContactService, CompanyService, NoteService ],
+  providers: [ ContactService, CompanyService, NoteService, RatingService ],
   bootstrap: [AppComponent],
   entryComponents: [ ConfirmationDialogComponent]
 })
