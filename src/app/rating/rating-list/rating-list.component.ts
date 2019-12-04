@@ -10,8 +10,7 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./rating-list.component.css']
 })
 export class RatingListComponent implements OnInit, OnChanges {
-  @Input() contactId: number;
-  displayedColumns = ['ratingvalue', 'description'];
+  displayedColumns = ['ratingValue', 'description'];
   ratings: IRating[] = [];
   summarizedRatings: IRating[] = [];
   errorMessage: string;
@@ -20,8 +19,7 @@ export class RatingListComponent implements OnInit, OnChanges {
     private _router: Router) { }
 
   ngOnInit() {
-    console.log(this.contactId);
-    this._ratingService.getRatings(this.contactId)
+    this._ratingService.getRatings()
         .subscribe(ratings => {
             this.ratings = ratings;
           },

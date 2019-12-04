@@ -1,0 +1,6 @@
+.mat-header-cell:first-child,.mat-cell:first-child{
+  flex:80%;
+}
+.mat-header-cell:nth-child(2),.mat-cell:nth-child(2){
+  flex:20%;
+}

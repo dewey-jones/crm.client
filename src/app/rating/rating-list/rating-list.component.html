@@ -1,7 +1,7 @@
 <div style="display: flex; flex-direction: column;" class="mat-elevation-z1">
   <mat-table #table [dataSource]="ratings">
     <ng-container matColumnDef="ratingValue">
-      <mat-header-cell *matHeaderCellDef>Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
       <mat-cell *matCellDef="let rating">
         {{rating.ratingValue}}
       </mat-cell>
@@ -9,9 +9,7 @@
     <ng-container matColumnDef="description">
       <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
       <mat-cell *matCellDef="let rating">
-        <span style="max-width: 50px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">
-          {{rating.description}}
-        </span>
+        {{rating.description}}
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

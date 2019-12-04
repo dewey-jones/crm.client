@@ -34,6 +34,10 @@ export class AppComponent {
     this._router.navigateByUrl('/company')
   }
 
+  public gotoRatings() {
+    this._router.navigateByUrl('/rating')
+  }
+
   openContextMenu() {
     this.trigger.openMenu();
   }
