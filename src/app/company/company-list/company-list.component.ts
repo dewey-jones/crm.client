@@ -58,7 +58,7 @@ export class CompanyListComponent implements OnInit {
     this.ratingFromService = filteredRating[0].description;
   }
 
-  getIcon(ratingNumber: number): any {
+  getIconName(ratingNumber: number): any {
     var iconMap = {
       "1": "arrow_upward",
       "2": "how_to_reg",
@@ -68,6 +68,7 @@ export class CompanyListComponent implements OnInit {
       "6": "help_outline",
       "7": "cancel",
       "8": "flight",
-  }
+    };
+    return iconMap[ratingNumber];
   }
 }

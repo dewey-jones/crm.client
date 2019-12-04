@@ -19,7 +19,6 @@ export class RatingService {
 
     getRatings(): Observable<IRating[]> {
         return this._http.get<IRating[]>(this._ratingUrl).pipe(
-        tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError),);
 }
     /*

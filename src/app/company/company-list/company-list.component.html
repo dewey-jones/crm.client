@@ -9,7 +9,7 @@
     <ng-container matColumnDef="rating">
       <mat-header-cell *matHeaderCellDef>Rating</mat-header-cell>
       <mat-cell *matCellDef="let element" (mouseover)="getRating(element.rating)" matTooltip={{ratingFromService}}>
-        {{element.rating}}
+        <i class="material-icons">{{getIconName(element.rating)}}</i>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
