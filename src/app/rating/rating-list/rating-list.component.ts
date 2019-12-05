@@ -12,7 +12,7 @@ import { AppService } from '../../app.service';
 })
 export class RatingListComponent implements OnInit, OnChanges {
   pageTitle: string = 'Rating List';
-  displayedColumns = ['ratingValue', 'description'];
+  displayedColumns = ['ratingValue', 'description', 'iconName'];
   ratings: IRating[] = [];
   summarizedRatings: IRating[] = [];
   errorMessage: string;
