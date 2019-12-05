@@ -55,9 +55,11 @@ export class CompanyDetailComponent implements OnInit {
       },
         error => this.errorMessage = <any>error);
   }
+
   back(): void {
     this._router.navigate(['/company']);
   }
+
   delete(): void {
     console.log(this.company);
     this._companyService.deleteCompany(this.company.id)
@@ -66,6 +68,7 @@ export class CompanyDetailComponent implements OnInit {
       },
         error => this.errorMessage = <any>error);
   }
+  
   openConfirmationDialog() {
     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false

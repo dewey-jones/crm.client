@@ -74,16 +74,9 @@ export class CompanyListComponent implements OnInit {
   }
 
   getIconName(ratingNumber: number): any {
-    var iconMap = {
-      "1": "arrow_upward",
-      "2": "how_to_reg",
-      "3": "person",
-      "4": "person_outline",
-      "5": "date_range",
-      "6": "help_outline",
-      "7": "cancel",
-      "8": "flight",
-    };
-    return iconMap[ratingNumber];
+    var filteredRating = this.ratings.filter(function (item) {
+      return item.ratingValue == ratingNumber;
+    });
+    return filteredRating[0].iconName;
   }
 }

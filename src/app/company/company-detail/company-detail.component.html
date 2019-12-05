@@ -11,14 +11,24 @@
         <input matInput placeholder="Addr2" name="addr2" [(ngModel)]="company.addr2">
       </mat-form-field>
       <div style="display: flex; flex-direction: row; justify-content: space-between">
-        <div style="display: inline-block; width: 50%">
+        <div style="width: 40%">
           <mat-form-field>
             <input matInput placeholder="City" name="city" [(ngModel)]="company.city">
           </mat-form-field>
         </div>
-        <div style="display: inline-block; width: 50%">
+        <div style="display: inline-block; width: 20%">
           <mat-form-field>
             <input matInput placeholder="State" name="state" [(ngModel)]="company.state">
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 20%">
+          <mat-form-field>
+            <select matNativeControl required placeholder="Rating">
+              <option value="volvo">Volvo</option>
+              <option value="saab">Saab</option>
+              <option value="mercedes">Mercedes</option>
+              <option value="audi">Audi</option>
+            </select>
           </mat-form-field>
         </div>
       </div>
