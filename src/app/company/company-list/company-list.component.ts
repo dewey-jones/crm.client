@@ -77,6 +77,6 @@ export class CompanyListComponent implements OnInit {
     var filteredRating = this.ratings.filter(function (item) {
       return item.ratingValue == ratingNumber;
     });
-    return filteredRating[0].iconName;
+    return (filteredRating && filteredRating[0]) ? filteredRating[0].iconName : "";
   }
 }

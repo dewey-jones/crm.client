@@ -1,34 +1,40 @@
 <div class='panel panel-primary' *ngIf='company'>
-  <form #companyForm="ngForm" style="padding: 1em">
+  <form [formGroup]="form" style="padding: 1em">
     <div class="formContainer">
       <mat-form-field>
-        <input matInput placeholder="Company" name="companyName" [(ngModel)]="company.companyName">
+        <input matInput placeholder="Company" name="companyName" formControlName="companyName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Addr1" name="addr1" [(ngModel)]="company.addr1">
+        <input matInput placeholder="Addr1" name="addr1" formControlName="addr1">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Addr2" name="addr2" [(ngModel)]="company.addr2">
+        <input matInput placeholder="Addr2" name="addr2" formControlName="addr2">
       </mat-form-field>
       <div style="display: flex; flex-direction: row; justify-content: space-between">
         <div style="width: 40%">
           <mat-form-field>
-            <input matInput placeholder="City" name="city" [(ngModel)]="company.city">
+            <input matInput placeholder="City" name="city" formControlName="city">
           </mat-form-field>
         </div>
-        <div style="display: inline-block; width: 20%">
+        <div style="display: inline-block; width: 15%">
           <mat-form-field>
-            <input matInput placeholder="State" name="state" [(ngModel)]="company.state">
+            <input matInput placeholder="State" name="state" formControlName="company.state">
           </mat-form-field>
         </div>
-        <div style="display: inline-block; width: 20%">
+        <div style="display: inline-block; width: 40%">
           <mat-form-field>
-            <select matNativeControl required placeholder="Rating">
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="mercedes">Mercedes</option>
-              <option value="audi">Audi</option>
-            </select>
+            <mat-select required [formControl]="form.controls.rating" 
+            name="rating" (selectionChange)="ratingSelection($event.value)" placeholder="Rating">
+              <mat-select-trigger>
+                  {{form.controls.rating.value?.name}}
+              </mat-select-trigger>
+              <mat-option *ngFor="let rating of ratings" [value]="rating">
+                <div class="option">
+                  <div>{{ rating.description }}</div>
+                  <div><i class="material-icons mt-icon">{{ rating.iconName}}</i></div>
+                </div>
+              </mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </div>

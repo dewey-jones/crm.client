@@ -16,7 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatSortModule } from '@angular/material';
+import { MatSortModule, MatSelectModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -36,7 +36,8 @@ import { MatSortModule } from '@angular/material';
     MatToolbarModule,
     MatSidenavModule,
     MatTooltipModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule
     ],
   exports: [
     MatButtonModule,
@@ -54,7 +55,8 @@ import { MatSortModule } from '@angular/material';
     MatToolbarModule,
     MatSidenavModule,
     MatTooltipModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule
     ],
   declarations: []
 })
