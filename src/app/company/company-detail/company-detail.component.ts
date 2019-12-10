@@ -70,16 +70,19 @@ export class CompanyDetailComponent implements OnInit {
   }
 
   assignMatching(obj1, obj2):object {
+    //https://stackoverflow.com/a/40573612/426806
     return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key]}), {});
   }
 
   setRatingValue(ratingValue): void {
-    console.log("Selected rating is: ", ratingValue);
-    this.company.ratingValue = ratingValue;
+    //this.company.ratingValue = ratingValue;
+    // console.log("before: ", this.companyForm.controls.ratingValue);
+    // Object.assign(this.companyForm.controls.ratingValue, {"value": ratingValue});
+    // this.companyForm.controls.ratingValue.setValue(ratingValue);
+    console.log("after: ", this.companyForm.controls.ratingValue);
   }
 
   getRatingName(ratingValue): string {
-    console.log("ratings", this.ratings);
     var filteredRatings = this.ratings.filter(rating => rating.ratingValue == ratingValue);
     return filteredRatings[0].description || '';
   }
