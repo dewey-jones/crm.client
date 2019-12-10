@@ -24,21 +24,22 @@
             <mat-icon>search</mat-icon>
           </button>
           <div>
-            <button type="button" mat-icon-button id="btnMore" [matMenuTriggerFor]="appMenu" 
-            [matMenuTriggerData]="menuData" ng-disabled="test">
+            <button type="button" mat-icon-button id="btnMore" [matMenuTriggerFor]="appMenu"
+              [matMenuTriggerData]="menuData" ng-disabled="test">
               <mat-icon>more_horiz</mat-icon>
             </button>
             <mat-menu #appMenu="matMenu" xPosition="before">
-                <ng-template matMenuContent let-aliasMenuItems="menuItems">
-                  <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="routeToPath(item.path)">
-                    {{item.text}}
-                  </button>
-                </ng-template>
+              <ng-template matMenuContent let-aliasMenuItems="menuItems">
+                <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="routeToPath(item.path)">
+                  {{item.text}}
+                </button>
+              </ng-template>
             </mat-menu>
           </div>
         </mat-toolbar>
       </div>
       <div>
+        <alert></alert>
         <router-outlet></router-outlet>
       </div>
     </mat-drawer-content>
