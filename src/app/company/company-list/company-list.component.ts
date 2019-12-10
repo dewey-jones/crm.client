@@ -37,7 +37,7 @@ export class CompanyListComponent implements OnInit {
       },
         error => this.errorMessage += <any>error);
 
-    this._ratingService.getRatings()
+    this._ratingService.getRatings('value')
       .subscribe(ratings => {
         this.ratings = ratings;
       },

@@ -19,7 +19,6 @@ export class ContactService {
 
     getContacts(companyId: number): Observable<IContact[]> {
         return this._http.get<IContact[]>(this._contactUrl + "/getByCompany?companyId=" + companyId).pipe(
-        tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError),);
 }
 

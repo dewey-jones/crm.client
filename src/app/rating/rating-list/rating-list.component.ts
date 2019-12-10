@@ -22,7 +22,7 @@ export class RatingListComponent implements OnInit, OnChanges {
     private _appService: AppService) { }
 
   ngOnInit() {
-    this._ratingService.getRatings()
+    this._ratingService.getRatings('value')
         .subscribe(ratings => {
             this.ratings = ratings;
           },

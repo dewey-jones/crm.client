@@ -17,8 +17,8 @@ export class RatingService {
     
     constructor(private _http: HttpClient) {}
 
-    getRatings(): Observable<IRating[]> {
-        return this._http.get<IRating[]>(this._ratingUrl).pipe(
+    getRatings(sortType): Observable<IRating[]> {
+        return this._http.get<IRating[]>(this._ratingUrl + `?sort=${sortType}`).pipe(
         catchError(this.handleError),);
 }
     /*

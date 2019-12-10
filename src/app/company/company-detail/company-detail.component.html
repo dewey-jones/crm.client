@@ -1,5 +1,5 @@
 <div class='panel panel-primary' *ngIf='company'>
-  <form [formGroup]="form" style="padding: 1em">
+  <form [formGroup]="companyForm" style="padding: 1em">
     <div class="formContainer">
       <mat-form-field>
         <input matInput placeholder="Company" name="companyName" formControlName="companyName">
@@ -23,12 +23,12 @@
         </div>
         <div style="display: inline-block; width: 40%">
           <mat-form-field>
-            <mat-select required [formControl]="form.controls.rating" 
-            name="rating" (selectionChange)="ratingSelection($event.value)" placeholder="Rating">
+            <mat-select required formControlName="ratingValue" 
+            name="rating" (selectionChange)="setRatingValue($event.value)" placeholder="Rating">
               <mat-select-trigger>
-                  {{form.controls.rating.value?.name}}
+                  {{getRatingName(companyForm.controls.ratingValue.value)}}
               </mat-select-trigger>
-              <mat-option *ngFor="let rating of ratings" [value]="rating">
+              <mat-option *ngFor="let rating of ratings" [value]="rating.ratingValue">
                 <div class="option">
                   <div>{{ rating.description }}</div>
                   <div><i class="material-icons mt-icon">{{ rating.iconName}}</i></div>

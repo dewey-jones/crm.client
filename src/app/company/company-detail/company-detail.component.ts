@@ -7,7 +7,7 @@ import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/co
 import { AppService } from '../../app.service';
 import { RatingService } from '../../rating/rating.service';
 import { IRating } from '../../rating/rating';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'crm-company-detail',
@@ -21,38 +21,34 @@ export class CompanyDetailComponent implements OnInit {
   public selectedRating: number;
   company: ICompany;
   dialogRef: M2<ConfirmationDialogComponent>;
-  public form: FormGroup;
-  public companyName = new FormControl();
-  public addr1 = new FormControl();
-  public addr2 = new FormControl();
-  public city = new FormControl();
-  public state = new FormControl();
-  public rating = new FormControl();
+  public companyForm: FormGroup;
 
   constructor(private _companyService: CompanyService,
     private _route: ActivatedRoute,
     private _router: Router,
     private _appService: AppService,
     private _ratingService: RatingService,
-    public dialog: M1) {
-      this.form = new FormGroup({
-        companyName: this.companyName,
-        addr1: this.addr1,
-        addr2: this.addr2,
-        city: this.city,
-        state: this.state,
-        rating: this.rating
+    public dialog: M1,
+    private fb: FormBuilder) {
+      this.companyForm = this.fb.group({
+        companyName: [''],
+        addr1: [''],
+        addr2: [''],
+        city: [''],
+        state: [''],
+        ratingValue: ['']
     });
   }
 
   ngOnInit(): void {
     let id = +this._route.snapshot.paramMap.get('id');
-
     if (id != 0) {
       this._companyService.getCompany(id)
         .subscribe(company => {
           this.company = company;
-          //this.form.value = {companyName: company.companyName};
+          var temp = this.assignMatching(this.companyForm.value, this.company);
+          console.log("temp: ", temp);
+          this.companyForm.setValue(temp);
         },
           error => this.errorMessage = <any>error);
     } else {
@@ -60,7 +56,7 @@ export class CompanyDetailComponent implements OnInit {
       this.pageTitle = "New Company";
     }
 
-    this._ratingService.getRatings()
+    this._ratingService.getRatings('value')
       .subscribe(ratings => {
         this.ratings = ratings;
       },
@@ -73,9 +69,19 @@ export class CompanyDetailComponent implements OnInit {
     });
   }
 
-  ratingSelection(ratingValue): void {
+  assignMatching(obj1, obj2):object {
+    return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key]}), {});
+  }
+
+  setRatingValue(ratingValue): void {
     console.log("Selected rating is: ", ratingValue);
-    this.company.rating = ratingValue;
+    this.company.ratingValue = ratingValue;
+  }
+
+  getRatingName(ratingValue): string {
+    console.log("ratings", this.ratings);
+    var filteredRatings = this.ratings.filter(rating => rating.ratingValue == ratingValue);
+    return filteredRatings[0].description || '';
   }
 
   save(): void {

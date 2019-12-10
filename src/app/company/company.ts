@@ -14,7 +14,7 @@ interface ICompany {
     mailDate: Date;
     callOn: Date;
     companyNotes: string;
-    rating: number;
+    ratingValue: number;
     nearby: boolean;
     appropriate: number;
     consultants: boolean;
@@ -36,7 +36,7 @@ class Company implements ICompany {
   mailDate: Date;
   callOn: Date;
   companyNotes: string;
-  rating: number;
+  ratingValue: number;
   nearby: boolean;
   appropriate: number;
   consultants: boolean;
@@ -57,7 +57,7 @@ class Company implements ICompany {
       this.mailDate = null;
       this.callOn = null;
       this.companyNotes = "";
-      this.rating = 0;
+      this.ratingValue = 0;
       this.nearby = false;
       this.appropriate = 0;
       this.consultants = false;    
