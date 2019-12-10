@@ -52,7 +52,7 @@ export class CompanyDetailComponent implements OnInit {
       this._companyService.getCompany(id)
         .subscribe(company => {
           this.company = company;
-          this.form.value = {companyName: company.companyName};
+          //this.form.value = {companyName: company.companyName};
         },
           error => this.errorMessage = <any>error);
     } else {

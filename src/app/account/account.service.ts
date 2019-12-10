@@ -14,6 +14,7 @@ import { IRegistration } from "./registration";
 @Injectable()
 export class AccountService {
     private _accountUrl = appSettings.serverPath + '/api/account';
+    private currentUser = null;
     
     constructor(private _http: HttpClient) {}
 
@@ -24,26 +25,13 @@ export class AccountService {
           catchError(this.handleError),);
     }
 
-    // getCompany(id: number): Observable<ICompany> {
-    //     return this._http.get<ICompany>(this._companyUrl + "/" + id)
-    //         .do(data => console.log('All: ' + JSON.stringify(data)))
-    //         .catch(this.handleError);
-    // }
+    setCurrentUser(username, password) {
+      this.currentUser = {username: username, password: password};
+    }
 
-    // saveCompany(company: ICompany): any {
-    //     const id = company.id;
-    //     console.log("in service", company);
-    //     console.log("URL", this._companyUrl + "/" + id);
-    //     return this._http.put(this._companyUrl + "/" + id, company)
-    //         .do(data => console.log('All: ' + JSON.stringify(data)))
-    //         .catch(this.handleError);
-    // }
-
-    // deleteCompany(id: number): any {
-    //     return this._http.delete(this._companyUrl + "/" + id)
-    //         .do(data => console.log('All: ' + JSON.stringify(data)))
-    //         .catch(this.handleError);
-    // }
+    getCurrentUser() {
+      return this.currentUser;
+    }
 
     private handleError(err: HttpErrorResponse) {
         console.log(err.message);
