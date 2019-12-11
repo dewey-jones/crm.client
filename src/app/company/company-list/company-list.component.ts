@@ -45,11 +45,9 @@ export class CompanyListComponent implements OnInit {
 
     this._appService.setTitle(this.pageTitle);
 
-    this._appService.setMenuData({
-      menuItems: [
-        { text: "Add Company", path: '/company/0' }
-      ]
-    });
+    this._appService.setMenuItems([
+      { text: "Add Company", action: this.addCompany.bind(this) }
+    ]);
   }
 
   ngAfterViewInit(): void {
@@ -63,6 +61,7 @@ export class CompanyListComponent implements OnInit {
   }
 
   addCompany(): void {
+    console.log("in addCompany");
     this._router.navigate(['/company', 0])
   }
 

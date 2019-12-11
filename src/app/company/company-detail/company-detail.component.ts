@@ -65,9 +65,7 @@ export class CompanyDetailComponent implements OnInit {
 
     this._appService.setTitle(this.pageTitle);
 
-    this._appService.setMenuData({
-      menuItems: []
-    });
+    this._appService.setMenuItems([]);
   }
 
   // assignMatching(obj1, obj2): object {

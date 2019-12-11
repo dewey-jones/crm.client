@@ -14,31 +14,32 @@ import { MatMenuTrigger } from '@angular/material/menu';
 export class AppComponent {
   trigger: MatMenuTrigger;
   pageTitle: string = 'CRM';
-  menuData: any = [{}];
+  menuItems: any[] = [];
   opened: boolean;
 
   constructor(private _router: Router, private appService: AppService) { }
 
-  // display page title in app bar
-  // https://stackoverflow.com/questions/51286357/angular-display-title-of-selected-component/51287553#51287553
   ngOnInit() {
+    // display page title in app bar
+    // https://stackoverflow.com/questions/51286357/angular-display-title-of-selected-component/51287553#51287553
     this.appService.getTitle().subscribe(pageTitle => this.pageTitle = pageTitle);
-    this.appService.getMenuData().subscribe(menuData => this.menuData = menuData);
+    // https://stackoverflow.com/questions/58924441/angular-how-to-pass-callback-in-menu-item-on-parent-component-menu
+    this.appService.menuItems$.subscribe(newMenu => this.menuItems = newMenu);
   }
   
-  public goHome() {
+  public goHome(): void {
     this._router.navigateByUrl('/')
   }
 
-  public gotoCompany() {
+  public gotoCompany(): void {
     this._router.navigateByUrl('/company')
   }
 
-  public gotoRatings() {
+  public gotoRatings(): void {
     this._router.navigateByUrl('/rating')
   }
 
-  openContextMenu() {
+  openContextMenu(): void {
     this.trigger.openMenu();
   }
 
@@ -46,8 +47,13 @@ export class AppComponent {
     this._router.navigateByUrl(path)
   }
 
+  performAction(action: any): void {
+
+  }
+
+  // ???
   isPageMenuDisabled() {
-    console.log(this.menuData);
-    return this.menuData.menuItems.length = 0;
+    console.log(this.menuItems);
+    return this.menuItems.length = 0;
   }
 }

@@ -5,8 +5,7 @@ import { Observable ,  BehaviorSubject } from 'rxjs';
 export class AppService {
   private title = new BehaviorSubject<string>('Home');
   private title$ = this.title.asObservable();
-  private menuData = new BehaviorSubject<Object>({});
-  private menuData$ = this.menuData.asObservable();
+  menuItems$: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor() {}
 
@@ -18,11 +17,13 @@ export class AppService {
     return this.title$;
   }
 
-  setMenuData(menuData: {}) {
-    this.menuData.next(menuData);
-  }
+  setMenuItems(menuItems: any[]) {
+    this.menuItems$.next(menuItems);
+    console.log("Obs", this.menuItems$)
+    console.log("Param", menuItems)
+ }
 
-  getMenuData(): Observable<Object> {
-    return this.menuData$;
+  getMenuItems(): Observable<Object> {
+    return this.menuItems$;
   }
 }

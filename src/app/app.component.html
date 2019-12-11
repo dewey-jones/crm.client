@@ -25,12 +25,12 @@
           </button>
           <div>
             <button type="button" mat-icon-button id="btnMore" [matMenuTriggerFor]="appMenu" 
-            [matMenuTriggerData]="menuData" ng-disabled="test">
+            [matMenuTriggerData]="menuItems" ng-disabled="test">
               <mat-icon>more_horiz</mat-icon>
             </button>
             <mat-menu #appMenu="matMenu" xPosition="before">
                 <ng-template matMenuContent let-aliasMenuItems="menuItems">
-                  <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="routeToPath(item.path)">
+                  <button mat-menu-item *ngFor="let item of aliasMenuItems" (click)="performAction(item.action)">
                     {{item.text}}
                   </button>
                 </ng-template>
