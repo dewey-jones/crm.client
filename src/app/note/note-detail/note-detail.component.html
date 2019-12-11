@@ -1,6 +1,6 @@
 <div class='panel panel-primary' *ngIf='note'>
   <div class="mat-headline flexRowCenter">{{pageHeading}}</div>
-  <form #noteForm="ngForm" (ngSubmit)="save()" style="padding: 1em">
+  <form [formGroup]="noteForm" (ngSubmit)="save()" style="padding: 1em">
     <div class="formContainer">
       <div style="display: flex; flex-direction: row;">
         <div>
@@ -9,21 +9,16 @@
         </div>
         <div>
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="Date" name="contactDate" [(ngModel)]="note.contactDate">
+            <input matInput required [matDatepicker]="picker" placeholder="Date" formControlName="contactDate">
           </mat-form-field>
         </div>
       </div>
       <mat-form-field>
-        <textarea matInput placeholder="Text" name="text" [(ngModel)]="note.noteText"></textarea>
+        <textarea matInput required placeholder="Text" formControlName="noteText"></textarea>
       </mat-form-field>
-      <!-- <div *ngIf="contactDate.invalid && (contactDate.dirty || contactDate.touched)" class="fieldInvalid">
-        <div *ngIf="contactDate.errors.required">
-          Contact Date is required.
-        </div>
-      </div> -->
     </div>
     <div class="flexRowAround" style="margin: 10px 0">
-      <button mat-raised-button color="primary" type="submit" id="btnSave">SAVE</button>
+      <button mat-raised-button color="primary" type="submit" id="btnSave" [disabled]="!noteForm.valid">SAVE</button>
       <button mat-raised-button color="" type="button" id="btnBack" (click)="back()">BACK</button>
       <button mat-raised-button color="warn" type="button" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
     </div>

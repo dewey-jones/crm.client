@@ -4,7 +4,9 @@ import { ContactService } from '../../contact/contact.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { INote, Note } from '../note';
 import { IContact } from '../../contact/contact';
-import {AppService} from '../../app.service';
+import { AppService } from '../../app.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { DataUtilities } from '../../utilities';
 
 @Component({
   selector: 'crm-note',
@@ -18,16 +20,22 @@ export class NoteDetailComponent implements OnInit {
   contactId: number;
   sub: any;  // subscription
   fullname: string;
-
   note: INote;
   contact: IContact;
+  public noteForm: FormGroup;
 
-  constructor(private _noteService: NoteService, 
+  constructor(private _noteService: NoteService,
     private _contactService: ContactService,
-    private _route: ActivatedRoute, 
+    private _route: ActivatedRoute,
     private _router: Router,
-    private _appService: AppService) {
-   }
+    private _appService: AppService,
+    private fb: FormBuilder,
+    private dataUtilities: DataUtilities) {
+    this.noteForm = this.fb.group({
+      contactDate: [''],
+      noteText: ['']
+    });
+  }
 
   ngOnInit(): void {
     this.sub = this._route
@@ -35,56 +43,57 @@ export class NoteDetailComponent implements OnInit {
       .subscribe(params => {
         // Defaults contactId to 0 if no query param provided (new contact).
         this.contactId = +params['contactId'] || 0;
-        console.log("this.contactId is", this.contactId);
       });
 
     let id = +this._route.snapshot.paramMap.get('id');
-    // this.pageTitle += `: ${id}`;
-    if(id != 0) {
-      this._noteService.getNote(id)
-      .subscribe(note => {
-          this.note = note;
-        },
-      error => this.errorMessage = <any>error,
-      () => this._contactService.getContact(this.contactId)
+
+    this._contactService.getContact(this.contactId)
       .subscribe(contact => {
         this.contact = contact;
-        this.fullname = this.contact.fName + ' ' + this.contact.lName;
-        console.log("fullname is", this.fullname);
-        this.pageHeading = this.fullname;
-      })
-      )
-   } else {
+        var fullname = this.contact.fName + ' ' + this.contact.lName;
+        this._appService.setTitle(fullname);
+      });
+
+    if (id != 0) {
+      this._noteService.getNote(id)
+        .subscribe(note => {
+          this.note = note;
+          var temp = this.dataUtilities.assignMatching(this.noteForm.value, this.note);
+          this.noteForm.setValue(temp);
+          //this.contactId = note.contactId;
+        },
+          error => this.errorMessage = <any>error,
+        )
+    } else {
       this.note = new Note();
-      this.note.contactDate = new Date();
+      this.noteForm.controls.contactDate.setValue(new Date());
     }
 
     this._appService.setTitle(this.pageTitle);
   }
 
   save(): void {
-    console.log(this.contactId);
-    console.log(this._route.snapshot.paramMap.get('id'));
+    // console.log(this.contactId);
+    // console.log(this._route.snapshot.paramMap.get('id'));
     let noteId = +this._route.snapshot.paramMap.get('id');
+    var updatedNote = Object.assign(this.note, this.noteForm.value);
     // if new note...
-    if(noteId === 0) {
-      this.note.contactId = this.contactId;
-      this._noteService.createNote(this.note)
+    if (noteId === 0) {
+      updatedNote.contactId = this.contactId;
+      this._noteService.createNote(updatedNote)
         .subscribe(note => {
-            this.note = note;
-            console.log("route", '/contact/' + this.contactId);
-            this._router.navigate(['/contact/', this.contactId]);
-               },
-        error => this.errorMessage = <any>error);
+          this.note = note;
+          this._router.navigate(['/contact/', this.contactId]);
+        },
+          error => this.errorMessage = <any>error);
     } else {
       console.log("updating note", this.note);
-      this._noteService.updateNote(this.note)
+      this._noteService.updateNote(updatedNote)
         .subscribe(note => {
-            this.note = note;
-            console.log("route", '/contact/' + this.contactId);
-            this._router.navigate(['/contact/', this.contactId]);
-            },
-        error => this.errorMessage = <any>error);
+          this.note = note;
+          this._router.navigate(['/contact/', this.contactId]);
+        },
+          error => this.errorMessage = <any>error);
     }
   }
 
@@ -96,11 +105,11 @@ export class NoteDetailComponent implements OnInit {
     console.log(this.note);
     this._noteService.deleteNote(this.note.id)
       .subscribe(note => {
-          this.note = note;
-          console.log("route", '/contact/' + this.contactId);
-          this._router.navigate(['/contact/', this.contactId]);
-    },
-      error => this.errorMessage = <any>error);
+        this.note = note;
+        console.log("route", '/contact/' + this.contactId);
+        this._router.navigate(['/contact/', this.contactId]);
+      },
+        error => this.errorMessage = <any>error);
   }
 
   ngOnDestroy() {

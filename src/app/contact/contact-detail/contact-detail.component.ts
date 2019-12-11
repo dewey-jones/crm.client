@@ -77,7 +77,7 @@ export class ContactDetailComponent implements OnInit {
     var updatedContact = Object.assign(this.contact, this.contactForm.value);
     // if new contact...
     if (contactId === 0) {
-      this.contact.companyId = this.companyId;
+      updatedContact.companyId = this.companyId;
       this._contactService.createContact(updatedContact)
         .subscribe(contact => {
           this.contact = contact;
