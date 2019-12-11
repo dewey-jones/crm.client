@@ -1,30 +1,29 @@
 <div class='panel panel-primary' *ngIf='company'>
-  <form [formGroup]="companyForm" style="padding: 1em">
+  <form [formGroup]="companyForm" (ngSubmit)="save()" style="padding: 1em">
     <div class="formContainer">
       <mat-form-field>
-        <input matInput placeholder="Company" name="companyName" formControlName="companyName">
+        <input matInput placeholder="Company" formControlName="companyName">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Addr1" name="addr1" formControlName="addr1">
+        <input matInput placeholder="Addr1" formControlName="addr1">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Addr2" name="addr2" formControlName="addr2">
+        <input matInput placeholder="Addr2" formControlName="addr2">
       </mat-form-field>
       <div style="display: flex; flex-direction: row; justify-content: space-between">
         <div style="width: 40%">
           <mat-form-field>
-            <input matInput placeholder="City" name="city" formControlName="city">
+            <input matInput placeholder="City" formControlName="city">
           </mat-form-field>
         </div>
         <div style="display: inline-block; width: 15%">
           <mat-form-field>
-            <input matInput placeholder="State" name="state" formControlName="state">
+            <input matInput placeholder="State" formControlName="state">
           </mat-form-field>
         </div>
         <div style="display: inline-block; width: 40%">
           <mat-form-field>
-            <mat-select required formControlName="ratingValue" 
-            name="rating" (selectionChange)="setRatingValue($event.value)" placeholder="Rating">
+            <mat-select required formControlName="ratingValue" placeholder="Rating">
               <mat-select-trigger>
                   {{getRatingName(companyForm.controls.ratingValue.value)}}
               </mat-select-trigger>
@@ -39,9 +38,9 @@
         </div>
       </div>
       <div style="display: flex; flex-direction: row; justify-content: space-around">
-        <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
-        <button mat-raised-button color="" id="btnBack" (click)="back()">BACK</button>
-        <button mat-raised-button color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
+        <button mat-raised-button type="submit" color="primary" id="btnSave">SAVE</button>
+        <button mat-raised-button type="button" color="" id="btnBack" (click)="back()">BACK</button>
+        <button mat-raised-button type="button" color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
       </div>
     </div>
   </form>

@@ -30,13 +30,13 @@ export class CompanyDetailComponent implements OnInit {
     private _ratingService: RatingService,
     public dialog: M1,
     private fb: FormBuilder) {
-      this.companyForm = this.fb.group({
-        companyName: [''],
-        addr1: [''],
-        addr2: [''],
-        city: [''],
-        state: [''],
-        ratingValue: ['']
+    this.companyForm = this.fb.group({
+      companyName: [''],
+      addr1: [''],
+      addr2: [''],
+      city: [''],
+      state: [''],
+      ratingValue: ['']
     });
   }
 
@@ -47,7 +47,6 @@ export class CompanyDetailComponent implements OnInit {
         .subscribe(company => {
           this.company = company;
           var temp = this.assignMatching(this.companyForm.value, this.company);
-          console.log("temp: ", temp);
           this.companyForm.setValue(temp);
         },
           error => this.errorMessage = <any>error);
@@ -69,29 +68,26 @@ export class CompanyDetailComponent implements OnInit {
     });
   }
 
-  assignMatching(obj1, obj2):object {
+  assignMatching(obj1, obj2): object {
     //https://stackoverflow.com/a/40573612/426806
-    return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key]}), {});
-  }
-
-  setRatingValue(ratingValue): void {
-    //this.company.ratingValue = ratingValue;
-    // console.log("before: ", this.companyForm.controls.ratingValue);
-    // Object.assign(this.companyForm.controls.ratingValue, {"value": ratingValue});
-    // this.companyForm.controls.ratingValue.setValue(ratingValue);
-    console.log("after: ", this.companyForm.controls.ratingValue);
+    return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key] }), {});
   }
 
   getRatingName(ratingValue): string {
-    var filteredRatings = this.ratings.filter(rating => rating.ratingValue == ratingValue);
-    return filteredRatings[0].description || '';
+    console.log("ratings", this.ratings);
+    if (this.ratings.length) {
+      var filteredRatings = this.ratings.filter(rating => rating.ratingValue == ratingValue);
+      return filteredRatings[0].description;
+    } else {
+      return '';
+    }
   }
 
   save(): void {
-    this._companyService.saveCompany(this.company)
+    var updatedCompany = Object.assign(this.company, this.companyForm.value);
+    this._companyService.saveCompany(updatedCompany)
       .subscribe(company => {
         this.company = company;
-        console.log("In detail ", this.company);
       },
         error => this.errorMessage = <any>error);
   }
