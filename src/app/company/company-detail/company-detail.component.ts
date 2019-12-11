@@ -7,7 +7,8 @@ import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/co
 import { AppService } from '../../app.service';
 import { RatingService } from '../../rating/rating.service';
 import { IRating } from '../../rating/rating';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { DataUtilities } from '../../utilities';
 
 @Component({
   selector: 'crm-company-detail',
@@ -18,7 +19,6 @@ export class CompanyDetailComponent implements OnInit {
   pageTitle: string = 'Company Detail';
   errorMessage: string;
   ratings: IRating[] = [];
-  public selectedRating: number;
   company: ICompany;
   dialogRef: M2<ConfirmationDialogComponent>;
   public companyForm: FormGroup;
@@ -29,7 +29,8 @@ export class CompanyDetailComponent implements OnInit {
     private _appService: AppService,
     private _ratingService: RatingService,
     public dialog: M1,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private dataUtilities: DataUtilities) {
     this.companyForm = this.fb.group({
       companyName: [''],
       addr1: [''],
@@ -46,12 +47,13 @@ export class CompanyDetailComponent implements OnInit {
       this._companyService.getCompany(id)
         .subscribe(company => {
           this.company = company;
-          var temp = this.assignMatching(this.companyForm.value, this.company);
+          var temp = this.dataUtilities.assignMatching(this.companyForm.value, this.company);
           this.companyForm.setValue(temp);
         },
           error => this.errorMessage = <any>error);
     } else {
       this.company = new Company();
+      this.companyForm.controls.state.setValue('CO');
       this.pageTitle = "New Company";
     }
 
@@ -68,13 +70,13 @@ export class CompanyDetailComponent implements OnInit {
     });
   }
 
-  assignMatching(obj1, obj2): object {
-    //https://stackoverflow.com/a/40573612/426806
-    return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key] }), {});
-  }
+  // assignMatching(obj1, obj2): object {
+  //   //https://stackoverflow.com/a/40573612/426806
+  //   return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key] }), {});
+  // }
 
   getRatingName(ratingValue): string {
-    if (this.ratings.length) {
+    if (this.ratings.length && ratingValue) {
       var filteredRatings = this.ratings.filter(rating => rating.ratingValue == ratingValue);
       return filteredRatings[0].description;
     } else {
@@ -84,11 +86,20 @@ export class CompanyDetailComponent implements OnInit {
 
   save(): void {
     var updatedCompany = Object.assign(this.company, this.companyForm.value);
-    this._companyService.saveCompany(updatedCompany)
-      .subscribe(company => {
-        this.company = company;
-      },
-        error => this.errorMessage = <any>error);
+    console.log("updatedCompany",updatedCompany);
+    let companyId = +this._route.snapshot.paramMap.get('id');
+    if (companyId == 0) {
+      this._companyService.createCompany(updatedCompany)
+        .subscribe(company => {
+          this.company = company;
+        }, error => this.errorMessage = <any>error);
+    } else {
+      this._companyService.updateCompany(updatedCompany)
+        .subscribe(company => {
+          this.company = company;
+          this._router.navigate(['/company']);
+        }, error => this.errorMessage = <any>error);
+    }
   }
 
   back(): void {

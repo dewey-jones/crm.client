@@ -4,7 +4,9 @@ import { CompanyService } from '../../company/company.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IContact, Contact } from '../contact';
 import { ICompany } from '../../company/company';
-import {AppService} from '../../app.service';
+import { AppService } from '../../app.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { DataUtilities } from '../../utilities';
 
 @Component({
   selector: 'crm-contact-detail',
@@ -12,20 +14,30 @@ import {AppService} from '../../app.service';
   styleUrls: ['./contact-detail.component.css']
 })
 export class ContactDetailComponent implements OnInit {
-  pageTitle: string = 'Contact Detail';
   errorMessage: string;
   companyId: number;
   sub: any;  // subscription
-
   contact: IContact;
   company: ICompany;
+  public contactForm: FormGroup;
 
   constructor(private _contactService: ContactService,
     private _companyService: CompanyService,
     private _route: ActivatedRoute,
     private _router: Router,
-    private _appService: AppService) { }
-
+    private _appService: AppService,
+    private fb: FormBuilder,
+    private dataUtilities: DataUtilities) {
+    this.contactForm = this.fb.group({
+      fName: [''],
+      lName: [''],
+      title: [''],
+      phone: [''],
+      ext: [''],
+      email: [''],
+      shouldContact: ['']
+    });
+  }
 
   ngOnInit(): void {
     this.sub = this._route
@@ -35,41 +47,38 @@ export class ContactDetailComponent implements OnInit {
         this.companyId = +params['companyId'] || 0;
       });
 
-    console.log(this._route.snapshot.paramMap.get('id'));
     let id = +this._route.snapshot.paramMap.get('id');
-    // this.pageTitle += `: ${id}`;
 
     if (id != 0) {
       this._contactService.getContact(id)
         .subscribe(contact => {
           this.contact = contact;
+          var temp = this.dataUtilities.assignMatching(this.contactForm.value, this.contact);
+          this.contactForm.setValue(temp);
           this.companyId = contact.companyId;
-          console.log("companyId is", this.companyId);
         },
           error => this.errorMessage = <any>error,
           () => this._companyService.getCompany(this.companyId)
             .subscribe(company => {
               this.company = company;
-              console.log("companyName is", this.company.companyName);
-              this.pageTitle = this.company.companyName;
             })
         )
+      this._appService.setTitle('Contact Detail');
     } else {
       this.contact = new Contact();
-      this.pageTitle = "New Contact";
+      this._appService.setTitle('New Contact');
     };
- 
-    this._appService.setTitle(this.pageTitle);
   }
 
   save(): void {
     console.log(this.contact);
     console.log(this._route.snapshot.paramMap.get('id'));
     let contactId = +this._route.snapshot.paramMap.get('id');
+    var updatedContact = Object.assign(this.contact, this.contactForm.value);
     // if new contact...
     if (contactId === 0) {
       this.contact.companyId = this.companyId;
-      this._contactService.createContact(this.contact)
+      this._contactService.createContact(updatedContact)
         .subscribe(contact => {
           this.contact = contact;
           console.log("route", '/company/' + this.companyId);
@@ -77,7 +86,7 @@ export class ContactDetailComponent implements OnInit {
         },
           error => this.errorMessage = <any>error);
     } else {
-      this._contactService.updateContact(this.contact)
+      this._contactService.updateContact(updatedContact)
         .subscribe(contact => {
           this.contact = contact;
           console.log("route", '/company/' + this.companyId);
