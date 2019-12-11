@@ -8,8 +8,8 @@
 		</ng-container>
     <ng-container matColumnDef="rating">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Rating</mat-header-cell>
-      <mat-cell *matCellDef="let element" (mouseover)="getRating(element.rating)" matTooltip={{ratingFromService}}>
-        <i class="material-icons">{{getIconName(element.rating)}}</i>
+      <mat-cell *matCellDef="let element" (mouseover)="getRating(element.ratingValue)" matTooltip={{ratingFromService}}>
+        <i class="material-icons">{{getIconName(element.ratingValue)}}</i>
       </mat-cell>
     </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

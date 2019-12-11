@@ -66,16 +66,16 @@ export class CompanyListComponent implements OnInit {
     this._router.navigate(['/company', 0])
   }
 
-  getRating(ratingNumber: number): any {
+  getRating(ratingValue: number): any {
     var filteredRating = this.ratings.filter(function (item) {
-      return item.ratingValue == ratingNumber;
+      return item.ratingValue == ratingValue;
     });
     this.ratingFromService = filteredRating[0].description;
   }
 
-  getIconName(ratingNumber: number): any {
+  getIconName(ratingValue: number): any {
     var filteredRating = this.ratings.filter(function (item) {
-      return item.ratingValue == ratingNumber;
+      return item.ratingValue == ratingValue;
     });
     return (filteredRating && filteredRating[0]) ? filteredRating[0].iconName : "";
   }
