@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { ConvertToSpacesPipe } from './shared/convert-to-spaces.pipe';
-import { StarComponent } from './shared/star.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { CompanyListComponent } from './company/company-list/company-list.component';
 import { CompanyDetailComponent } from './company/company-detail/company-detail.component';
@@ -31,7 +30,6 @@ import { RatingService } from './rating/rating.service';
   declarations: [
     AppComponent,
     ConvertToSpacesPipe,
-    StarComponent,
     WelcomeComponent,
     CompanyListComponent,
     ContactListComponent,

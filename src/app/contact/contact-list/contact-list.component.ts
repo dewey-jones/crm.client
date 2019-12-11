@@ -20,7 +20,6 @@ export class ContactListComponent implements OnInit, OnChanges {
     private _appService: AppService) { }
 
   ngOnInit() {
-    console.log(this.companyId);
     this._contactService.getContacts(this.companyId)
         .subscribe(contacts => {
             this.contacts = contacts;
