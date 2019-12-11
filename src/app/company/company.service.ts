@@ -24,27 +24,21 @@ export class CompanyService {
 
     getCompany(id: number): Observable<ICompany> {
         return this._http.get<ICompany>(this._companyUrl + "/" + id).pipe(
-            tap(data => console.log('All: ' + JSON.stringify(data))),
             catchError(this.handleError),);
     }
 
     saveCompany(company: ICompany): any {
         const id = company.id;
-        console.log("in service", company);
-        console.log("URL", this._companyUrl + "/" + id);
         return this._http.put(this._companyUrl + "/" + id, company).pipe(
-            tap(data => console.log('All: ' + JSON.stringify(data))),
             catchError(this.handleError),);
     }
 
     deleteCompany(id: number): any {
         return this._http.delete(this._companyUrl + "/" + id).pipe(
-            tap(data => console.log('All: ' + JSON.stringify(data))),
             catchError(this.handleError),);
     }
 
     private handleError(err: HttpErrorResponse) {
-        console.log(err.message);
         return observableThrowError(err.message);
     }
 }

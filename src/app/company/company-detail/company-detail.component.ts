@@ -74,7 +74,6 @@ export class CompanyDetailComponent implements OnInit {
   }
 
   getRatingName(ratingValue): string {
-    console.log("ratings", this.ratings);
     if (this.ratings.length) {
       var filteredRatings = this.ratings.filter(rating => rating.ratingValue == ratingValue);
       return filteredRatings[0].description;
@@ -100,7 +99,6 @@ export class CompanyDetailComponent implements OnInit {
     this._companyService.deleteCompany(this.company.id)
       .subscribe(company => {
         this.company = company;
-        console.log(this.company);
       },
         error => this.errorMessage = <any>error);
   }
