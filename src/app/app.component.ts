@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 // import { CompanyService } from './company/company.service';
 import { Router } from '@angular/router';
 import { AppService } from "./app.service";
 import { MatMenuTrigger } from '@angular/material/menu';
-// import { MatSidenavContainer as sidenavContainer, MatDialogRef as M2 } from '@angular/material';
+import{ ChangeDetectorRef } from '@angular/core';
 
 @Component ({
   selector: 'pm-root',
@@ -11,20 +11,26 @@ import { MatMenuTrigger } from '@angular/material/menu';
   styleUrls: ['./app.component.css'],
   providers: [AppService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewChecked {
   trigger: MatMenuTrigger;
   pageTitle: string = 'CRM';
   menuItems: any[] = [];
   opened: boolean;
 
-  constructor(private _router: Router, private appService: AppService) { }
+  constructor(private _router: Router,
+    private appService: AppService,
+    private changeDetector: ChangeDetectorRef) { }
 
   ngOnInit() {
     // display page title in app bar
     // https://stackoverflow.com/questions/51286357/angular-display-title-of-selected-component/51287553#51287553
     this.appService.getTitle().subscribe(pageTitle => this.pageTitle = pageTitle);
     // https://stackoverflow.com/questions/58924441/angular-how-to-pass-callback-in-menu-item-on-parent-component-menu
-    this.appService.menuItems$.subscribe(newMenu => this.menuItems = newMenu);
+    this.appService.getMenuItems().subscribe(newMenu => this.menuItems = newMenu);
+  }
+
+  ngAfterViewChecked() {
+    this.changeDetector.detectChanges();
   }
   
   public goHome(): void {

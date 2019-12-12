@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ICompany } from '../company';
 import { CompanyService } from '../company.service';
@@ -14,8 +14,8 @@ import { MatSort } from '@angular/material/sort';
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.css']
 })
-export class CompanyListComponent implements OnInit {
-  pageTitle: string = 'Company List';
+export class CompanyListComponent implements OnInit, AfterViewInit {
+  //pageTitle: string = 'Company List';
   errorMessage: string;
   public displayedColumns = ['companyName', 'rating'];
   // companies: ICompany[] = [];
@@ -42,12 +42,6 @@ export class CompanyListComponent implements OnInit {
         this.ratings = ratings;
       },
         error => this.errorMessage += <any>error);
-
-    this._appService.setTitle(this.pageTitle);
-
-    this._appService.setMenuItems([
-      { text: "Add Company", action: this.addCompany.bind(this) }
-    ]);
   }
 
   ngAfterViewInit(): void {
@@ -58,6 +52,12 @@ export class CompanyListComponent implements OnInit {
         this.dataSource.sort = this.tablesort;
       }
     });
+
+    this._appService.setTitle('Company List');
+
+    this._appService.setMenuItems([
+      { text: "Add Company", action: this.addCompany.bind(this) }
+    ]);
   }
 
   addCompany(): void {
