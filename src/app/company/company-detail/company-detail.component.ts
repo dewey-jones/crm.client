@@ -95,13 +95,13 @@ export class CompanyDetailComponent implements OnInit {
       this._companyService.updateCompany(updatedCompany)
         .subscribe(company => {
           this.company = company;
-          this._router.navigate(['/company']);
+          this.backToList();
         }, error => this.errorMessage = <any>error);
     }
   }
 
   back(): void {
-    this._router.navigate(['/company']);
+    this.backToList();
   }
 
   delete(): void {
@@ -110,6 +110,10 @@ export class CompanyDetailComponent implements OnInit {
         this.company = company;
       },
         error => this.errorMessage = <any>error);
+  }
+
+  backToList(): void {
+    this._router.navigate(['/company']);
   }
 
   openConfirmationDialog() {
@@ -121,6 +125,8 @@ export class CompanyDetailComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.delete();
+      } else {
+        this.backToList();
       }
       this.dialogRef = null;
     });
