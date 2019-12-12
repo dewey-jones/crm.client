@@ -42,6 +42,12 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
         this.ratings = ratings;
       },
         error => this.errorMessage += <any>error);
+
+    this._appService.setTitle('Company List');
+
+    this._appService.setMenuItems([
+      { text: "Add Company", action: this.addCompany.bind(this) }
+    ]);
   }
 
   ngAfterViewInit(): void {
@@ -52,12 +58,6 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
         this.dataSource.sort = this.tablesort;
       }
     });
-
-    this._appService.setTitle('Company List');
-
-    this._appService.setMenuItems([
-      { text: "Add Company", action: this.addCompany.bind(this) }
-    ]);
   }
 
   addCompany(): void {

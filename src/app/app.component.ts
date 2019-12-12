@@ -26,7 +26,10 @@ export class AppComponent implements OnInit, AfterViewChecked {
     // https://stackoverflow.com/questions/51286357/angular-display-title-of-selected-component/51287553#51287553
     this.appService.getTitle().subscribe(pageTitle => this.pageTitle = pageTitle);
     // https://stackoverflow.com/questions/58924441/angular-how-to-pass-callback-in-menu-item-on-parent-component-menu
-    this.appService.getMenuItems().subscribe(newMenu => this.menuItems = newMenu);
+    this.appService.getMenuItems().subscribe(newMenu => {
+      this.menuItems = newMenu;
+      console.log("this.menuItems", this.menuItems);
+    });
   }
 
   ngAfterViewChecked() {
