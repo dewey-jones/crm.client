@@ -46,7 +46,7 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
     this._appService.setTitle('Company List');
 
     this._appService.setMenuItems([
-      { text: "Add Company", action: this.addCompany.bind(this) }
+      { text: "Add Company", path: '/company/0' }
     ]);
   }
 

@@ -56,9 +56,9 @@ export class AppComponent implements OnInit, AfterViewChecked {
     this._router.navigateByUrl(path)
   }
 
-  performAction(action: any): void {
-    action();
-  }
+  // performAction(action: any): void {
+  //   action();
+  // }
 
   // ???
   isPageMenuDisabled() {
