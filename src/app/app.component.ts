@@ -48,7 +48,7 @@ export class AppComponent {
   }
 
   performAction(action: any): void {
-
+    action();
   }
 
   // ???
