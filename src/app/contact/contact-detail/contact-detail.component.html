@@ -35,9 +35,10 @@
     <div>
       <mat-checkbox formControlName="shouldContact">Should Contact</mat-checkbox>
     </div>
-    <div class="flexRowAround" style="margin: 10px 0">
+    <div class="flexRowBetween" style="margin: 15px 0">
+      <button mat-icon-button color="primary" type="button" (click)="backToList()"><mat-icon>keyboard_backspace</mat-icon></button>
       <button mat-raised-button color="primary" type="submit" id="btnSave" [disabled]="!contactForm.valid">SAVE</button>
-      <button mat-raised-button color="" type="button" id="btnBack" (click)="backToList()">BACK</button>
+      <div style="width: 55px; visibility: hidden;"></div>
     </div>
     <div id="note-list">
       <crm-note-list [contactId]='contact.id'></crm-note-list>
