@@ -65,13 +65,11 @@ export class CompanyDetailComponent implements OnInit {
 
     this._appService.setTitle(this.pageTitle);
 
-    this._appService.setMenuItems([]);
+    this._appService.setMenuItems([
+      { text: "Add Company", action: this.add.bind(this) },
+      { text: "Delete Company", action: this.openDeleteDialog.bind(this) }
+    ]);
   }
-
-  // assignMatching(obj1, obj2): object {
-  //   //https://stackoverflow.com/a/40573612/426806
-  //   return Object.keys(obj1).reduce((a, key) => ({ ...a, [key]: obj2[key] }), {});
-  // }
 
   getRatingName(ratingValue): string {
     if (this.ratings.length && ratingValue) {
@@ -100,14 +98,15 @@ export class CompanyDetailComponent implements OnInit {
     }
   }
 
-  back(): void {
-    this.backToList();
+  add(): void {
+    this._router.navigate(['/company', 0])
   }
 
   delete(): void {
     this._companyService.deleteCompany(this.company.id)
       .subscribe(company => {
         this.company = company;
+        this.backToList();
       },
         error => this.errorMessage = <any>error);
   }
@@ -116,7 +115,7 @@ export class CompanyDetailComponent implements OnInit {
     this._router.navigate(['/company']);
   }
 
-  openConfirmationDialog() {
+  openDeleteDialog() {
     this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       disableClose: false
     });
@@ -125,9 +124,7 @@ export class CompanyDetailComponent implements OnInit {
     this.dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.delete();
-      } else {
-        this.backToList();
-      }
+      } 
       this.dialogRef = null;
     });
   }

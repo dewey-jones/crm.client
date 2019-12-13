@@ -7,6 +7,8 @@ import { ICompany } from '../../company/company';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataUtilities } from '../../utilities';
+import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'crm-contact-detail',
@@ -19,6 +21,7 @@ export class ContactDetailComponent implements OnInit {
   sub: any;  // subscription
   contact: IContact;
   company: ICompany;
+  dialogRef: M2<ConfirmationDialogComponent>;
   public contactForm: FormGroup;
 
   constructor(private _contactService: ContactService,
@@ -26,6 +29,7 @@ export class ContactDetailComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _appService: AppService,
+    public dialog: M1,
     private fb: FormBuilder,
     private dataUtilities: DataUtilities) {
     this.contactForm = this.fb.group({
@@ -68,6 +72,10 @@ export class ContactDetailComponent implements OnInit {
       this.contact = new Contact();
       this._appService.setTitle('New Contact');
     };
+
+    this._appService.setMenuItems([
+      { text: "Delete Contact", action: this.openDeleteDialog.bind(this) }
+    ]);
   }
 
   save(): void {
@@ -81,32 +89,44 @@ export class ContactDetailComponent implements OnInit {
       this._contactService.createContact(updatedContact)
         .subscribe(contact => {
           this.contact = contact;
-          console.log("route", '/company/' + this.companyId);
-          this._router.navigate(['/company/', this.companyId]);
+          this.backToList();
         },
           error => this.errorMessage = <any>error);
     } else {
       this._contactService.updateContact(updatedContact)
         .subscribe(contact => {
           this.contact = contact;
-          console.log("route", '/company/' + this.companyId);
-          this._router.navigate(['/company/', this.companyId]);
+          this.backToList();
         },
           error => this.errorMessage = <any>error);
     }
   }
 
-  back(): void {
+  backToList(): void {
     this._router.navigate(['/company/', this.companyId]);
   }
 
   delete(): void {
-    console.log(this.contact);
     this._contactService.deleteContact(this.contact.id)
       .subscribe(company => {
         this.contact = company;
+        this.backToList();
       },
         error => this.errorMessage = <any>error);
+  }
+
+  openDeleteDialog() {
+    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete();
+      }
+      this.dialogRef = null;
+    });
   }
 
   onShouldContactChange(value): void {
@@ -116,7 +136,4 @@ export class ContactDetailComponent implements OnInit {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
-
-
-
 }

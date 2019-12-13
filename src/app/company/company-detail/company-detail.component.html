@@ -10,7 +10,7 @@
       <mat-form-field>
         <input matInput placeholder="Addr2" formControlName="addr2">
       </mat-form-field>
-      <div style="display: flex; flex-direction: row; justify-content: space-between">
+      <div class="flexRowBetween">
         <div style="width: 40%">
           <mat-form-field>
             <input matInput placeholder="City" formControlName="city">
@@ -28,7 +28,7 @@
                   {{getRatingName(companyForm.controls.ratingValue.value)}}
               </mat-select-trigger>
               <mat-option *ngFor="let rating of ratings" [value]="rating.ratingValue">
-                <div class="option">
+                <div class="flexRowBetween">
                   <div>{{ rating.description }}</div>
                   <div><i class="material-icons mt-icon">{{ rating.iconName}}</i></div>
                 </div>
@@ -37,10 +37,9 @@
           </mat-form-field>
         </div>
       </div>
-      <div style="display: flex; flex-direction: row; justify-content: space-around">
+      <div class="flexRowAround">
         <button mat-raised-button type="submit" color="primary" id="btnSave" [disabled]="!companyForm.valid">SAVE</button>
-        <button mat-raised-button type="button" color="" id="btnBack" (click)="back()">BACK</button>
-        <button mat-raised-button type="button" color="warn" id="btnDelete" (click)="openConfirmationDialog()">DELETE</button>
+        <button mat-raised-button type="button" color="" id="btnBack" (click)="backToList()">BACK</button>
       </div>
     </div>
   </form>

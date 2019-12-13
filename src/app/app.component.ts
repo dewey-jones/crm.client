@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
-// import { CompanyService } from './company/company.service';
 import { Router } from '@angular/router';
 import { AppService } from "./app.service";
 import { MatMenuTrigger } from '@angular/material/menu';
 import{ ChangeDetectorRef } from '@angular/core';
+import { MatDrawer } from '@angular/material';
 
 @Component ({
   selector: 'pm-root',
@@ -16,6 +16,7 @@ export class AppComponent implements OnInit, AfterViewChecked {
   pageTitle: string = 'CRM';
   menuItems: any[] = [];
   opened: boolean;
+  drawer: MatDrawer;
 
   constructor(private _router: Router,
     private appService: AppService,
@@ -37,20 +38,23 @@ export class AppComponent implements OnInit, AfterViewChecked {
   }
   
   public goHome(): void {
-    this._router.navigateByUrl('/')
+    this._router.navigateByUrl('/');
+    //this.drawer.close();
   }
 
   public gotoCompany(): void {
     this._router.navigateByUrl('/company')
+    //this.trigger.closeMenu();
   }
 
   public gotoRatings(): void {
     this._router.navigateByUrl('/rating')
+    //this.trigger.closeMenu();
   }
 
-  openContextMenu(): void {
-    this.trigger.openMenu();
-  }
+  // openContextMenu(): void {
+  //   this.trigger.openMenu();
+  // }
 
   routeToPath(path: string) {
     this._router.navigateByUrl(path)

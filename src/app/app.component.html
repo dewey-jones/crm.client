@@ -15,7 +15,7 @@
     </mat-drawer>
     <mat-drawer-content>
       <div>
-        <mat-toolbar style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 12px">
+        <mat-toolbar class="flexRowBetween" style=" margin-bottom: 12px">
           <button type="button" mat-icon-button id="btnMenu" (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
           </button>
@@ -24,12 +24,12 @@
             <mat-icon>search</mat-icon>
           </button>
           <div>
-            <button type="button" mat-icon-button id="btnMore" [matMenuTriggerFor]="appMenu" 
+            <button type="button" mat-icon-button #menuTrigger="matMenuTrigger" [matMenuTriggerFor]="appMenu" 
             ng-disabled="isPageMenuDisabled()">
               <mat-icon>more_horiz</mat-icon>
             </button>
             <mat-menu #appMenu="matMenu" xPosition="before">
-                  <button mat-menu-item *ngFor="let item of menuItems" (click)="performAction(item.action)">
+                  <button mat-menu-item *ngFor="let item of menuItems" (click)="performAction(item.action); drawer.close();">
                     {{item.text}}
                   </button>
             </mat-menu>

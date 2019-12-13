@@ -1,7 +1,7 @@
 <div class='panel panel-primary' *ngIf='contact'>
   <form [formGroup]="contactForm" (ngSubmit)="save()" style="padding: 1em">
     <div class="formContainer">
-      <div style="display: flex; flex-direction: row; justify-content: space-between">
+      <div class="flexRowBetween">
         <div style="display: inline-block; width: 50%">
           <mat-form-field>
             <input matInput required placeholder="First Name" formControlName="fName">
@@ -16,7 +16,7 @@
       <mat-form-field>
         <input matInput placeholder="Title" formControlName="title">
       </mat-form-field>
-      <div style="display: flex; flex-direction: row; justify-content: space-between">
+      <div class="flexRowBetween">
         <div style="display: inline-block; width: 50%">
           <mat-form-field>
             <input matInput placeholder="Phone" formControlName="phone">
@@ -37,9 +37,7 @@
     </div>
     <div class="flexRowAround" style="margin: 10px 0">
       <button mat-raised-button color="primary" type="submit" id="btnSave" [disabled]="!contactForm.valid">SAVE</button>
-      <button mat-raised-button color="" type="button" id="btnBack" (click)="back()">BACK</button>
-      <button mat-raised-button color="warn" type="button" id="btnDelete"
-        (click)="openConfirmationDialog()">DELETE</button>
+      <button mat-raised-button color="" type="button" id="btnBack" (click)="backToList()">BACK</button>
     </div>
     <div id="note-list">
       <crm-note-list [contactId]='contact.id'></crm-note-list>

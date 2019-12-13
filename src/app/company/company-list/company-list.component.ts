@@ -61,7 +61,6 @@ export class CompanyListComponent implements OnInit, AfterViewInit {
   }
 
   addCompany(): void {
-    console.log("in addCompany");
     this._router.navigate(['/company', 0])
   }
 

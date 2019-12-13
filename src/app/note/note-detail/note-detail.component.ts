@@ -7,6 +7,8 @@ import { IContact } from '../../contact/contact';
 import { AppService } from '../../app.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataUtilities } from '../../utilities';
+import { MatDialog as M1, MatDialogRef as M2 } from '@angular/material/dialog';
+import { ConfirmationDialogComponent } from '../../shared/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'crm-note',
@@ -23,12 +25,14 @@ export class NoteDetailComponent implements OnInit {
   note: INote;
   contact: IContact;
   public noteForm: FormGroup;
+  dialogRef: M2<ConfirmationDialogComponent>;
 
   constructor(private _noteService: NoteService,
     private _contactService: ContactService,
     private _route: ActivatedRoute,
     private _router: Router,
     private _appService: AppService,
+    public dialog: M1,
     private fb: FormBuilder,
     private dataUtilities: DataUtilities) {
     this.noteForm = this.fb.group({
@@ -83,7 +87,7 @@ export class NoteDetailComponent implements OnInit {
       this._noteService.createNote(updatedNote)
         .subscribe(note => {
           this.note = note;
-          this._router.navigate(['/contact/', this.contactId]);
+          this.backToList();
         },
           error => this.errorMessage = <any>error);
     } else {
@@ -91,25 +95,37 @@ export class NoteDetailComponent implements OnInit {
       this._noteService.updateNote(updatedNote)
         .subscribe(note => {
           this.note = note;
-          this._router.navigate(['/contact/', this.contactId]);
+          this.backToList();
         },
           error => this.errorMessage = <any>error);
     }
   }
 
-  back(): void {
+  backToList(): void {
     this._router.navigate(['/contact/', this.contactId]);
   }
 
   delete(): void {
-    console.log(this.note);
     this._noteService.deleteNote(this.note.id)
       .subscribe(note => {
         this.note = note;
-        console.log("route", '/contact/' + this.contactId);
-        this._router.navigate(['/contact/', this.contactId]);
+        this.backToList();
       },
         error => this.errorMessage = <any>error);
+  }
+
+  openDeleteDialog() {
+    this.dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      disableClose: false
+    });
+    this.dialogRef.componentInstance.confirmMessage = "Are you sure you want to delete?"
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.delete();
+      }
+      this.dialogRef = null;
+    });
   }
 
   ngOnDestroy() {
