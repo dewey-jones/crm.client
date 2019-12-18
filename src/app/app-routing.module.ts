@@ -10,6 +10,7 @@ import { ContactDetailComponent } from './contact/contact-detail/contact-detail.
 import { NoteListComponent } from './note/note-list/note-list.component';
 import { NoteDetailComponent } from './note/note-detail/note-detail.component';
 import { RatingListComponent } from './rating/rating-list/rating-list.component';
+import { ContactAllComponent } from './contact/contact-all/contact-all.component';
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'welcome', component: WelcomeComponent },
   { path: 'company', component: CompanyListComponent },
   { path: 'company/:id', component: CompanyDetailComponent },
+  { path: 'contacts', component: ContactAllComponent },
   { path: 'contact', component: ContactListComponent },
   { path: 'contact/:id', component: ContactDetailComponent },
   { path: 'note', component: NoteListComponent },

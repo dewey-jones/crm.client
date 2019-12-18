@@ -52,6 +52,11 @@ export class AppComponent implements OnInit, AfterViewChecked {
     //this.trigger.closeMenu();
   }
 
+  public gotoAllContacts(): void {
+    this._router.navigateByUrl('/contacts')
+    //this.trigger.closeMenu();
+  }
+
   // openContextMenu(): void {
   //   this.trigger.openMenu();
   // }

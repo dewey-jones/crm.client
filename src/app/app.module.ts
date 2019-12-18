@@ -25,7 +25,7 @@ import { LoginComponent } from './account/login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RatingListComponent } from './rating/rating-list/rating-list.component';
 import { RatingService } from './rating/rating.service';
-import { CompanyAllComponent } from './company-all/company-all.component';
+import { ContactAllComponent } from './contact/contact-all/contact-all.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { CompanyAllComponent } from './company-all/company-all.component';
     ConfirmationDialogComponent,
     RegisterComponent,
     LoginComponent,
-    CompanyAllComponent
+    ContactAllComponent
   ],
   imports: [
     BrowserModule,
