@@ -26,6 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RatingListComponent } from './rating/rating-list/rating-list.component';
 import { RatingService } from './rating/rating.service';
 import { ContactAllComponent } from './contact/contact-all/contact-all.component';
+import { AlertModule } from './shared/alerts';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ContactAllComponent } from './contact/contact-all/contact-all.component
     AppMaterialModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AlertModule
   ],
   providers: [ ContactService, CompanyService, NoteService, RatingService ],
   bootstrap: [AppComponent],

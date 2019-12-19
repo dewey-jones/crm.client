@@ -1,23 +1,43 @@
 <div class='panel panel-primary'>
   <div class="mat-headline flexRowCenter">{{pageTitle}}</div>
-  <form #registrationForm="ngForm" style="padding: 1em">
-    <div class="formContainer">
-      <mat-form-field>
-        <input matInput placeholder="Email" name="email" [(ngModel)]="registration.email">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="User Name" name="userName" [(ngModel)]="registration.userName">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" name="password" [(ngModel)]="registration.password">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Confirm Password" name="confirmPassword" [(ngModel)]="registration.confirmPassword">
-      </mat-form-field>
-      <div class="flexRowAround">
-        <button mat-raised-button color="primary" type="submit" id="btnSave" (click)="save()">SAVE</button>
-        <button mat-raised-button color="" id="btnBack">BACK</button>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email is required</div>
+          </div>
       </div>
-    </div>
+      <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+              <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+              <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+              <div *ngIf="f.confirmPassword.errors.required">Confirmation Password is required</div>
+              <div *ngIf="f.confirmPassword.errors.minlength">Confirmation Password must be at least 6 characters</div>
+          </div>
+      </div>
+      <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">
+              <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+              Register
+          </button>
+          <a routerLink="/login" class="btn btn-link">Cancel</a>
+      </div>
   </form>
+
 </div>
