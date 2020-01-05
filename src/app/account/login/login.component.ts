@@ -6,7 +6,6 @@ import { first, tap } from 'rxjs/operators';
 import { ILogin, Login } from '../login';
 import { IRegistration, Registration } from '../registration';
 import { AccountService } from '../account.service';
-import { AlertService } from '../../shared/alerts';
 import {Location} from '@angular/common';
 
 @Component({
@@ -26,7 +25,6 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private accountService: AccountService,
-    private alertService: AlertService,
     private location: Location
   ) {
     // redirect to home if already logged in
@@ -57,9 +55,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    this.alertService.clear();
-
     // stop here if form is invalid
     if (this.loginForm.invalid) {
       return;
@@ -76,7 +71,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.alertService.error(error);
           this.loading = false;
         });
   }

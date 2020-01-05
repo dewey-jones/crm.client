@@ -3,7 +3,9 @@ import { Router } from '@angular/router';
 import { AppService } from "./app.service";
 import { MatMenuTrigger } from '@angular/material/menu';
 import{ ChangeDetectorRef } from '@angular/core';
-import { MatDrawer } from '@angular/material';
+import { MatDrawer, 
+  MatSnackBar, MatSnackBarConfig, MatSnackBarHorizontalPosition, MatSnackBarVerticalPosition, MatSnackBarModule } from '@angular/material';
+  import { NotificationService } from './shared/notificationService';
 
 @Component ({
   selector: 'pm-root',
@@ -18,9 +20,20 @@ export class AppComponent implements OnInit, AfterViewChecked {
   opened: boolean;
   drawer: MatDrawer;
 
+  snackBarConfig: MatSnackBarConfig;
+  horizontalPosition: MatSnackBarHorizontalPosition = 'center';
+  verticalPosition: MatSnackBarVerticalPosition = 'top';
+  snackBarAutoHide = '1500';
+
   constructor(private _router: Router,
     private appService: AppService,
-    private changeDetector: ChangeDetectorRef) { }
+    private changeDetector: ChangeDetectorRef,
+    private notificationService: NotificationService,
+    private snackBar: MatSnackBar) {
+      this.notificationService.notification$.subscribe(message => {
+        this.openSnackBar(message);
+      });
+     }
 
   ngOnInit() {
     // display page title in app bar
@@ -74,4 +87,15 @@ export class AppComponent implements OnInit, AfterViewChecked {
     console.log(this.menuItems);
     return this.menuItems.length = 0;
   }
+
+  openSnackBar(message) {
+    this.snackBarConfig = new MatSnackBarConfig();
+    this.snackBarConfig.horizontalPosition = this.horizontalPosition;
+    this.snackBarConfig.verticalPosition = this.verticalPosition;
+    this.snackBarConfig.duration = parseInt(this.snackBarAutoHide, 0);
+    this.snackBarConfig.panelClass = 'snackbar-class';
+    //this.snackBarConfig.panelClass = 'glam-snackbar';
+    this.snackBar.open(message, undefined, this.snackBarConfig);
+  }
+
 }

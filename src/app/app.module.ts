@@ -26,7 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RatingListComponent } from './rating/rating-list/rating-list.component';
 import { RatingService } from './rating/rating.service';
 import { ContactAllComponent } from './contact/contact-all/contact-all.component';
-import { AlertModule } from './shared/alerts';
+import { MatSnackBarModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -53,7 +53,7 @@ import { AlertModule } from './shared/alerts';
     BrowserAnimationsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AlertModule
+    MatSnackBarModule
   ],
   providers: [ ContactService, CompanyService, NoteService, RatingService ],
   bootstrap: [AppComponent],

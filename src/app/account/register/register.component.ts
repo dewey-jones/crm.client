@@ -5,7 +5,6 @@ import { first } from 'rxjs/operators';
 
 import { AccountService } from '../account.service';
 import { IRegistration } from '../registration';
-import { AlertService } from '../../shared/alerts';
 
 @Component({
   selector: 'pm-register',
@@ -21,7 +20,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private alertService: AlertService,
     private accountService: AccountService
   ) {
     // redirect to home if already logged in
@@ -45,9 +43,6 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     this.submitted = true;
 
-    // reset alerts on submit
-    this.alertService.clear();
-
     // stop here if form is invalid
     if (this.registerForm.invalid) {
       return;
@@ -58,11 +53,9 @@ export class RegisterComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successful');
           this.router.navigate(['/login']);
         },
         error => {
-          this.alertService.error(error);
           this.loading = false;
         });
   }
