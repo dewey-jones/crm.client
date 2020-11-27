@@ -4,3 +4,5 @@ Sometimes a PUT or DELETE will not fire a request over http.  The problem is tha
 
 For version mismatches see https://stackoverflow.com/questions/47115649/metadata-version-mismatch-with-angular-4
 
+DJ - Instructions for building a pipeline in Azure DevOps:
+https://medium.com/javascript-in-plain-english/how-to-create-a-build-pipeline-for-angular-in-azure-devops-a9255385275e
