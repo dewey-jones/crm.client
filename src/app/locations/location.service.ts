@@ -3,7 +3,7 @@ import {throwError as observableThrowError,  Observable } from 'rxjs';
 
 import {catchError, tap} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { appSettings } from "../app-settings";
+import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
@@ -13,7 +13,7 @@ import { ILocation } from "./location";
 
 @Injectable()
 export class LocationService {
-    private _locationUrl = appSettings.serverPath + '/api/Location/Get/';
+    private _locationUrl = environment.apiPath + '/api/Location/Get/';
 
     constructor(private _http: HttpClient) {}
 

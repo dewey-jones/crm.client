@@ -1,13 +1,13 @@
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { appSettings } from "../app-settings";
+import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IContact } from "./contact";
 
 @Injectable()
 export class ContactService {
-  private _contactUrl = appSettings.serverPath + '/api/contact';
+  private _contactUrl = environment.apiPath + '/api/contact';
 
   constructor(private _http: HttpClient) { }
 

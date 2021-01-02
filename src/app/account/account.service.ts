@@ -2,7 +2,7 @@
 import { throwError as observableThrowError, BehaviorSubject, Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { appSettings } from "../app-settings";
+import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { IRegistration } from "./registration";
@@ -13,7 +13,7 @@ import { User } from './user';
   providedIn: 'root'
 })
 export class AccountService {
-    private _accountUrl = appSettings.serverPath + '/api/account';
+    private _accountUrl = environment.apiPath + '/api/account';
     private currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
       

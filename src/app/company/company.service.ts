@@ -2,13 +2,13 @@
 import { throwError as observableThrowError, Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { appSettings } from "../app-settings";
+import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ICompany } from "./company";
 
 @Injectable()
 export class CompanyService {
-  private _companyUrl = appSettings.serverPath + '/api/company';
+  private _companyUrl = environment.apiPath + '/api/company';
 
   constructor(private _http: HttpClient) { }
 

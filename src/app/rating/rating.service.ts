@@ -3,7 +3,7 @@ import {throwError as observableThrowError,  Observable } from 'rxjs';
 
 import {catchError, tap} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { appSettings } from "../app-settings";
+import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
@@ -13,7 +13,7 @@ import { IRating } from "./rating";
 
 @Injectable()
 export class RatingService {
-    private _ratingUrl = appSettings.serverPath + '/api/rating';
+    private _ratingUrl = environment.apiPath + '/api/rating';
     
     constructor(private _http: HttpClient) {}
 

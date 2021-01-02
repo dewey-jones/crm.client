@@ -1,4 +1,4 @@
-export const appSettings = {
-    serverPath: "http://localhost:50294",
+export const environment = {
+    apiPath: "http://localhost:50294",
     authenticationPath: "http://localhost:63228"
 };

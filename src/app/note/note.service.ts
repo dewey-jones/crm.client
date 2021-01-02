@@ -3,7 +3,7 @@ import {throwError as observableThrowError,  Observable } from 'rxjs';
 
 import {catchError, tap} from 'rxjs/operators';
 import { Injectable } from "@angular/core";
-import { appSettings } from "../app-settings";
+import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
@@ -13,7 +13,7 @@ import { INote } from "./note";
 
 @Injectable()
 export class NoteService {
-    private _noteUrl = appSettings.serverPath + '/api/note';
+    private _noteUrl = environment.apiPath + '/api/note';
     
     constructor(private _http: HttpClient) {}
 
